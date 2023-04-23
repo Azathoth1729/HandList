@@ -13,19 +13,25 @@ class CasualUnitTest {
     @Test
     fun listTest() {
         val l = listOf(1, 2, 3, 7, 8)
-        println(l.subList(2, 8))
+//        println(l.subList(2, 8))
+        assert(listOf<Int>().dropLast(1).isEmpty())
+        assert(emptyList<Int>().joinToString("/").isBlank())
     }
 
     @Test
     fun mutableListTest() {
         val list = mutableListOf(1, 2, 3)
-
         println(list.map { it + 1 }) // [1, 2, 3]
 
     }
 
     @Test
-    fun date_API_Test() {
+    fun stringTest() {
+        println("/".split("/"))
+    }
+
+    @Test
+    fun `date API Test`() {
         val currentTime = LocalDateTime.now()
         println("Current time is:$currentTime")
     }

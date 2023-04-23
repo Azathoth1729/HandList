@@ -1,5 +1,7 @@
 package com.azathoth.handlist.fs
 
+import com.azathoth.handlist.common.fs.PurePath
+import com.azathoth.handlist.common.fs.TrieFs
 import junit.framework.TestCase.*
 import org.junit.Test
 

@@ -1,5 +1,9 @@
 package com.azathoth.handlist.fs
 
+import com.azathoth.handlist.common.fs.File
+import com.azathoth.handlist.common.fs.FileVisitor
+import com.azathoth.handlist.common.fs.Visitor
+
 class PrintIndentedVisitor<T>(private var indent: Int) : FileVisitor<T> {
     override fun visitTree(tree: File<T>): Visitor<T, File<T>> = PrintIndentedVisitor(indent + 2)
 

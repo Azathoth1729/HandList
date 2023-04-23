@@ -8,14 +8,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.azathoth.handlist.R
-import com.azathoth.handlist.data.task.Status
-import com.azathoth.handlist.data.task.TaskUiState
-import com.azathoth.handlist.ui.AppViewModelProvider
+import com.azathoth.handlist.data.Status
+import com.azathoth.handlist.data.model.spacenode.SpaceNode
+import com.azathoth.handlist.data.model.task.TaskUiState
+import com.azathoth.handlist.data.model.user.User
+import com.azathoth.handlist.ui.components.dialog.AssignUsersDialog
+import com.azathoth.handlist.ui.components.dialog.UserList
 import com.azathoth.handlist.ui.theme.HandListTheme
-import com.azathoth.handlist.ui.viewmodels.NewTaskVM
-import com.azathoth.handlist.util.format
+import com.azathoth.handlist.ui.screens.task.NewTaskVM
+import com.azathoth.handlist.common.util.format
 import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
@@ -25,6 +28,8 @@ import com.maxkeppeler.sheets.calendar.models.CalendarStyle
 @Composable
 fun TaskEntryBody(
     taskUiState: TaskUiState,
+    listNodes: List<SpaceNode>,
+    users: List<User>,
     modifier: Modifier = Modifier,
     onSaveClick: () -> Unit = {},
     onDeleteClick: () -> Unit = {},
@@ -36,7 +41,13 @@ fun TaskEntryBody(
             .fillMaxWidth()
             .padding(16.dp)
     ) {
-        TaskInputForm(taskUiState = taskUiState, onValueChange = onTaskValueChange)
+        TaskInputForm(
+            taskUiState = taskUiState,
+            onValueChange = onTaskValueChange,
+            listNodes = listNodes,
+            users = users,
+        )
+
         Spacer(modifier = modifier.height(16.dp))
 
         Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
@@ -64,13 +75,13 @@ fun TaskEntryBody(
 @Composable
 fun TaskInputForm(
     taskUiState: TaskUiState,
+    listNodes: List<SpaceNode>,
+    users: List<User>,
     onValueChange: (TaskUiState) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var expanded by remember { mutableStateOf(false) }
-    val options = Status.values().map { it.name }
-
     val calendarState = rememberUseCaseState()
+    var dialogExpanded by remember { mutableStateOf(false) }
 
     CalendarDialog(
         state = calendarState,
@@ -89,9 +100,27 @@ fun TaskInputForm(
         },
     )
 
+    AssignUsersDialog(
+        dialogExpanded = dialogExpanded,
+        onDialogExpanded = { dialogExpanded = it },
+        onConfirm = {}
+    ) {
+        UserList(
+            allUsers = users,
+            assignUsers = taskUiState.assigns,
+            toggleUser = { user, isContain ->
+                if (isContain) {
+                    taskUiState.assigns.remove(user)
+                } else {
+                    taskUiState.assigns.add(user)
+                }
+            }
+        )
+    }
 
     Column(
-        modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(16.dp)
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         OutlinedTextField(
             value = taskUiState.name,
@@ -99,39 +128,40 @@ fun TaskInputForm(
             label = { Text(stringResource(R.string.task_name_req)) },
             modifier = Modifier.fillMaxWidth(),
         )
-        ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = { expanded = !expanded }) {
-            OutlinedTextField(
-                value = taskUiState.status,
-                onValueChange = {},
-                label = { Text(stringResource(R.string.task_status_req)) },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .menuAnchor(),
-                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-            )
-            ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-                options.forEach {
-                    DropdownMenuItem(
-                        text = { Text(it) },
-                        onClick = {
-                            onValueChange(taskUiState.copy(status = it))
-                            expanded = false
-                        },
-                        contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
-                    )
 
-                }
+        DropdownMenu(
+            taskUiState = taskUiState,
+            onValueChange = { taskUiState, value ->
+                onValueChange(taskUiState.copy(spaceNode = value))
+            },
+            value = taskUiState.spaceNode?.path ?: "",
+            labelTextRes = R.string.task_location_req,
+            options = listNodes,
+        )
+
+        DropdownMenu(
+            taskUiState = taskUiState,
+            onValueChange = { taskUiState, value ->
+                onValueChange(taskUiState.copy(status = value))
+            },
+            value = taskUiState.status,
+            labelTextRes = R.string.task_status_req,
+            options = Status.values().map { it.name },
+        )
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+
+            taskUiState.assigns.map {
+                Text(it.nickname.substring(0..3))
+                Spacer(modifier = Modifier.width(8.dp))
+            }
+
+            Spacer(Modifier.weight(1f))
+
+            Button(onClick = { dialogExpanded = true }) {
+                Text(stringResource(R.string.assignees))
             }
         }
-
-
-//        OutlinedTextField(
-//            value = taskUiState.path,
-//            onValueChange = { onValueChange(taskUiState.copy(path = it)) },
-//            label = { Text(stringResource(R.string.task_path_req)) },
-//            modifier = Modifier.fillMaxWidth(),
-//        )
-
 
         Row(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -140,10 +170,13 @@ fun TaskInputForm(
             Text(text = "${taskUiState.startTime}")
             Text(text = "${taskUiState.endTime}")
 
+            Spacer(Modifier.weight(1f))
+
             Button(onClick = { calendarState.show() }) {
                 Text(stringResource(R.string.task_add_date_req))
             }
         }
+
 
 
         OutlinedTextField(
@@ -159,9 +192,11 @@ fun TaskInputForm(
 @Composable
 private fun NewTaskPreview() {
     HandListTheme {
-        val viewModel: NewTaskVM = viewModel(factory = AppViewModelProvider.Factory)
+        val viewModel: NewTaskVM = hiltViewModel()
         TaskEntryBody(
             taskUiState = viewModel.taskUiState,
+            listNodes = listOf(),
+            users = listOf(),
             onTaskValueChange = viewModel::updateUiState,
             isEdit = true,
         )

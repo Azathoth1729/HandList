@@ -1,8 +1,7 @@
 package com.azathoth.handlist.data
 
-import com.azathoth.handlist.data.task.Status
-import com.azathoth.handlist.util.toEnum
-import com.azathoth.handlist.util.toInt
+import com.azathoth.handlist.common.util.toEnum
+import com.azathoth.handlist.common.util.toInt
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
 

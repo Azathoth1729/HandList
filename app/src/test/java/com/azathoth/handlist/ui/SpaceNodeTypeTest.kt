@@ -1,6 +1,6 @@
 package com.azathoth.handlist.ui
 
-import com.azathoth.handlist.ui.viewmodels.SpaceNodeType
+import com.azathoth.handlist.data.model.spacenode.SpaceNodeType
 import org.junit.Test
 
 class SpaceNodeTypeTest {

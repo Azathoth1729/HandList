@@ -1,6 +1,8 @@
 package com.azathoth.handlist.fs
 
+import com.azathoth.handlist.common.fs.PurePath
 import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.assertNull
 import org.junit.Test
 
 class PurePathTest {
@@ -18,7 +20,7 @@ class PurePathTest {
         if (javaPath.root != null) {
             assertEquals(javaPath.root.toString(), purePath.root.toString())
         } else {
-            assertEquals(purePath.root, PurePath(""))
+            assertNull(purePath.root)
         }
         assertEquals(javaPath.fileName.toString(), purePath.filename.toString())
         assertEquals(javaPath.isAbsolute, purePath.isAbsolute)
@@ -32,7 +34,7 @@ class PurePathTest {
         if (javaPath.parent != null) {
             assertEquals(javaPath.parent.toString(), purePath.parent.toString())
         } else {
-            assertEquals(purePath.parent, PurePath(""))
+            assertNull(purePath.parent)
         }
         (0 until purePath.nameCount).forEach {
             assertEquals(javaPath.getName(it).toString(), purePath.getName(it).toString())
@@ -82,8 +84,8 @@ class PurePathTest {
         println(purePath.parent)
 
         purePath = PurePath("")
-        assertEquals(purePath.root, PurePath(""))
-        assertEquals(purePath.parent, PurePath(""))
+        assertNull(purePath.root)
+        assertNull(purePath.parent)
     }
 
     @Test
@@ -131,17 +133,22 @@ class PurePathTest {
         val p = ""
         var javaPath = java.nio.file.Paths.get(p)
         assert(javaPath.fileName.toString() == "")
+        assertNull(javaPath.root)
         javaPathBasicInfo(javaPath)
         println()
+
         javaPath = java.nio.file.Paths.get("/")
         javaPathBasicInfo(javaPath)
         println()
+
         javaPath = java.nio.file.Paths.get("   /")
         javaPathBasicInfo(javaPath)
         println()
+
         javaPath = java.nio.file.Paths.get("   ")
         javaPathBasicInfo(javaPath)
         println()
+
         javaPath = java.nio.file.Paths.get(" /d /a ")
         javaPathBasicInfo(javaPath)
     }
@@ -149,7 +156,7 @@ class PurePathTest {
     @Test
     fun javaPathTest3() {
         val p = "home/wil/ope"
-        var javaPath = java.nio.file.Paths.get(p)
+        val javaPath = java.nio.file.Paths.get(p)
         javaPathBasicInfo(javaPath)
     }
 
@@ -166,7 +173,7 @@ class PurePathTest {
     @Test
     fun javaPathTest5() {
         val p = "home/wil/ope"
-        var javaPath = java.nio.file.Paths.get(p)
+        val javaPath = java.nio.file.Paths.get(p)
         println(javaPath.resolve(java.nio.file.Paths.get(p)))
     }
 }

@@ -8,9 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.azathoth.handlist.ui.screens.EditTaskScreen
-import com.azathoth.handlist.ui.screens.HomeScreen
+import com.azathoth.handlist.ui.screens.home.HomeScreen
 import com.azathoth.handlist.ui.screens.NewTaskScreen
-import com.azathoth.handlist.ui.screens.SpacesScreen
+import com.azathoth.handlist.ui.screens.spacenode.SpacesScreen
 
 @Composable
 fun HandListNavHost(

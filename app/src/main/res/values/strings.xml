@@ -1,16 +1,28 @@
 <resources>
     <string name="app_name">HandList</string>
-    <string name="no_item_description">Don\'t have any task for now</string>
-    <string name="save_action">Save</string>
-    <string name="del_action">Delete</string>
 
-    <string name="file_name">File Name</string>
+    <string name="no_item_description">You currently have no tasks</string>
+
+    <string name="loading_tasks">Loading Tasks…</string>
+
+
+    <string name="save_action">Save</string>
+    <string name="close_action">Close</string>
+    <string name="del_action">Delete</string>
+    <string name="dialog_confirm">Confirm</string>
+    <string name="dialog_dismiss">Dismiss</string>
+
+    <string name="file_name">Filename</string>
     <string name="file_type">File Type</string>
+
 
     <string name="task_name_req">Task Name</string>
     <string name="task_status_req">Task Status</string>
+    <string name="task_location_req">Task Location</string>
     <string name="task_desc_req">Task Description</string>
     <string name="task_add_date_req">Pick dates</string>
     <string name="task_path_req">Task Path</string>
+
+    <string name="assignees">Assignees</string>
 
 </resources>

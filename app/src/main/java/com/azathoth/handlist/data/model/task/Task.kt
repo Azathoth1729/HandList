@@ -1,7 +1,7 @@
 package com.azathoth.handlist.data.model.task
 
-import com.azathoth.handlist.data.model.user.User
 import com.azathoth.handlist.data.model.spacenode.SpaceNode
+import com.azathoth.handlist.data.model.user.User
 
 data class Task(
     val id: Long,

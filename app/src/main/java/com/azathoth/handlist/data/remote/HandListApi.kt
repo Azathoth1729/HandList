@@ -2,13 +2,11 @@ package com.azathoth.handlist.data.remote
 
 import com.azathoth.handlist.data.model.spacenode.SpaceNode
 import com.azathoth.handlist.data.model.task.Task
+import com.azathoth.handlist.data.model.user.auth.AuthRequest
+import com.azathoth.handlist.data.model.user.auth.RegisterRequest
+import com.azathoth.handlist.data.model.user.auth.TokenResponse
 import com.azathoth.handlist.data.model.user.User
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.PUT
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface HandListApi {
     /**
@@ -56,8 +54,12 @@ interface HandListApi {
     @DELETE("spacenodes/{id}")
     suspend fun deleteNode(@Path("id") node_id: Long)
 
-
     @GET("users")
     suspend fun getAllUsers(): List<User>
 
+    @POST("auth/authenticate")
+    suspend fun signIn(@Body request: AuthRequest): TokenResponse
+
+    @POST("auth/register")
+    suspend fun signUp(@Body request: RegisterRequest): TokenResponse
 }

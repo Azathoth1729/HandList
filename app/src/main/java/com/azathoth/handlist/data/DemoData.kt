@@ -1,8 +1,8 @@
 package com.azathoth.handlist.data
 
-import com.azathoth.handlist.data.model.user.User
 import com.azathoth.handlist.common.fs.PurePath
 import com.azathoth.handlist.common.fs.TrieFs
+import com.azathoth.handlist.data.model.user.User
 
 object DemoData {
     fun demoNodeTree(): TrieFs<Nothing> {

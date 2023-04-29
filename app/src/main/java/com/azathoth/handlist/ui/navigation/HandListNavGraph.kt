@@ -8,8 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.azathoth.handlist.ui.screens.EditTaskScreen
-import com.azathoth.handlist.ui.screens.home.HomeScreen
 import com.azathoth.handlist.ui.screens.NewTaskScreen
+import com.azathoth.handlist.ui.screens.auth.AuthScreen
+import com.azathoth.handlist.ui.screens.home.HomeScreen
 import com.azathoth.handlist.ui.screens.spacenode.SpacesScreen
 
 @Composable
@@ -19,9 +20,18 @@ fun HandListNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = HomeDest.route,
+        startDestination = AuthDest.route,
         modifier = modifier
     ) {
+        composable(route = AuthDest.route) {
+            AuthScreen(navigateToHome = {
+                navController.navigate(HomeDest.route) {
+                    popUpTo(HomeDest.route) {
+                        inclusive = true
+                    }
+                }
+            })
+        }
         composable(route = HomeDest.route) {
             HomeScreen(navigateToEditTask = {
                 navController.navigate("${TaskEntryDest.route}/${it}")
@@ -39,10 +49,7 @@ fun HandListNavHost(
                 navArgument(TaskEntryDest.taskIdArg) { type = NavType.IntType }
             )
         ) {
-            EditTaskScreen(
-                navigateBack = { navController.popBackStack() },
-
-                )
+            EditTaskScreen(navigateBack = { navController.popBackStack() })
         }
     }
 }

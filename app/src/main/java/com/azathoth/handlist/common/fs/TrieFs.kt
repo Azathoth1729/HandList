@@ -60,7 +60,7 @@ class TrieFs<T> : FileSystem<T>, FileVisitable<T> {
         return true
     }
 
-    // TODO: more efficient algorithm
+    // TODO: require an efficient algorithm
     override fun cd(p: PurePath): Boolean =
         if (!p.isAbsolute) cdAbsolute(pwd() + p) else cdAbsolute(p)
 

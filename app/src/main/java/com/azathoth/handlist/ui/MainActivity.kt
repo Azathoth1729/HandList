@@ -3,7 +3,6 @@ package com.azathoth.handlist.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.azathoth.handlist.ui.screens.HandListApp
 import dagger.hilt.android.AndroidEntryPoint
 
 

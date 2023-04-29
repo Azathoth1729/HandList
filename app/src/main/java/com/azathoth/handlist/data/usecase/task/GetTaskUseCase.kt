@@ -1,7 +1,6 @@
 package com.azathoth.handlist.data.usecase.task
 
 import com.azathoth.handlist.common.Resource
-import com.azathoth.handlist.data.model.task.Task
 import com.azathoth.handlist.data.model.task.TaskRepo
 import com.azathoth.handlist.data.model.task.TaskUiState
 import com.azathoth.handlist.data.model.task.toUiState

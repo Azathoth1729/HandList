@@ -1,7 +1,7 @@
 package com.azathoth.handlist.common.fs
 
 /**
-   Interface of an Emulated file system
+Interface of an Emulated file system
  */
 interface FileSystem<T> {
     /**
@@ -13,7 +13,10 @@ interface FileSystem<T> {
      */
     fun ls(p: PurePath): List<PurePath>?
     fun ls(pStr: String): List<PurePath>? = this.ls(PurePath(pStr))
-    // list files of current directory
+
+    /**
+     * List files of current directory
+     */
     fun ls(): List<PurePath>? = this.ls(this.pwd())
 
     /**
@@ -27,6 +30,12 @@ interface FileSystem<T> {
     fun mkdir(vararg ps: PurePath) = ps.forEach { this.mkdir(it) }
     fun mkdir(vararg pStrs: String) = pStrs.forEach { this.mkdir(it) }
 
+    /**
+     *
+     * Create file(not directory).
+     *
+     * Algorithmic complexity:
+     */
     fun touch(p: PurePath): Boolean
     fun touch(pStr: String): Boolean = this.touch(PurePath(pStr))
     fun touch(pStr: List<PurePath>) = pStr.forEach { this.touch(it) }
@@ -34,6 +43,9 @@ interface FileSystem<T> {
     fun touch(vararg pStr: String) = pStr.forEach { this.touch(it) }
 
     /**
+     *
+     * Remove path.
+     *
      * Algorithmic complexity: O(N)
      */
     fun rm(p: PurePath): Boolean
@@ -43,10 +55,16 @@ interface FileSystem<T> {
     fun rm(vararg ps: String) = ps.forEach { this.rm(it) }
 
     /**
+     * Change the working directory
+     *
      * Algorithmic complexity: O(N)
      */
     fun cd(p: PurePath): Boolean
     fun cd(p: String): Boolean = this.cd(PurePath(p))
+
+    /**
+     * Print name of current/working directory
+     */
 
     fun pwd(): PurePath
 }

@@ -3,7 +3,7 @@ package com.azathoth.handlist.ui.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.outlined.ChevronRight
 import androidx.compose.material.icons.outlined.ExpandMore
 import androidx.compose.material3.*
@@ -16,9 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.azathoth.handlist.common.fs.PurePath
 import com.azathoth.handlist.ui.components.dialog.NewNodeDialog
-
-import com.azathoth.handlist.ui.theme.HandListTheme
 import com.azathoth.handlist.ui.screens.spacenode.NewNodeVM
+import com.azathoth.handlist.ui.theme.HandListTheme
 
 
 @Composable

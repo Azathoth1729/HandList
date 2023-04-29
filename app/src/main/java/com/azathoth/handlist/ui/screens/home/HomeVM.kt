@@ -1,21 +1,22 @@
 package com.azathoth.handlist.ui.screens.home
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.azathoth.handlist.common.Resource
-
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
-
 import com.azathoth.handlist.data.usecase.task.GetTasksUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
 
 
 @HiltViewModel
 class HomeVM @Inject constructor(private val usecase: GetTasksUseCase) : ViewModel() {
     private var _state by mutableStateOf(TaskListState())
+
     val state: TaskListState
         get() = _state
 

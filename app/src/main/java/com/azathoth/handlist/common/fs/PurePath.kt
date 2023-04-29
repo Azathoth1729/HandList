@@ -5,10 +5,10 @@ package com.azathoth.handlist.common.fs
 
  */
 class PurePath(pathStr: String) {
-    val isAbsolute: Boolean = pathStr.startsWith("/")
-
     private val pathComponents: List<String> =
         pathStr.filterNot { it.isWhitespace() }.split("/").filter { it != "" }
+
+    val isAbsolute: Boolean = pathStr.startsWith("/")
 
     private val prefix: String
         get() = if (isAbsolute) "/" else ""

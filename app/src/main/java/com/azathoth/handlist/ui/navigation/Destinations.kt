@@ -6,6 +6,9 @@ import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Apps
 import androidx.compose.material.icons.filled.Menu
 
+object AuthDest: NavDest {
+    override val route: String = "Auth"
+}
 
 object HomeDest : IconNavDest {
     override val icon = Icons.Default.Menu

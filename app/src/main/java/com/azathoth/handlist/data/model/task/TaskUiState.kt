@@ -1,10 +1,10 @@
 package com.azathoth.handlist.data.model.task
 
 import androidx.compose.runtime.mutableStateListOf
-import com.azathoth.handlist.data.model.user.User
+import com.azathoth.handlist.common.util.format
 import com.azathoth.handlist.data.Status
 import com.azathoth.handlist.data.model.spacenode.SpaceNode
-import com.azathoth.handlist.common.util.format
+import com.azathoth.handlist.data.model.user.User
 import java.time.LocalDate
 
 data class TaskUiState(

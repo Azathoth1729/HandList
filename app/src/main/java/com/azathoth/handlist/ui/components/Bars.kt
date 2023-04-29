@@ -7,7 +7,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.azathoth.handlist.ui.navigation.AppMainScreens
-import com.azathoth.handlist.ui.navigation.NavDest
 import com.azathoth.handlist.ui.navigation.HomeDest
 import com.azathoth.handlist.ui.navigation.IconNavDest
 import com.azathoth.handlist.ui.theme.HandListTheme

@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 /**
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class CasualUnitTest {
+class CasualTest {
     @Test
     fun listTest() {
         val l = listOf(1, 2, 3, 7, 8)

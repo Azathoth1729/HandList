@@ -8,5 +8,4 @@ interface NavDest {
 
 interface IconNavDest : NavDest {
     val icon: ImageVector
-
 }

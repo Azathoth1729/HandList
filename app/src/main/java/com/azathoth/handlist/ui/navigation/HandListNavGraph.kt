@@ -7,11 +7,12 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.azathoth.handlist.ui.screens.EditTaskScreen
-import com.azathoth.handlist.ui.screens.NewTaskScreen
 import com.azathoth.handlist.ui.screens.auth.AuthScreen
 import com.azathoth.handlist.ui.screens.home.HomeScreen
 import com.azathoth.handlist.ui.screens.spacenode.SpacesScreen
+import com.azathoth.handlist.ui.screens.spacenode.TasksOfNodeScreen
+import com.azathoth.handlist.ui.screens.task.EditTaskScreen
+import com.azathoth.handlist.ui.screens.task.NewTaskScreen
 
 @Composable
 fun HandListNavHost(
@@ -32,17 +33,34 @@ fun HandListNavHost(
                 }
             })
         }
+
         composable(route = HomeDest.route) {
             HomeScreen(navigateToEditTask = {
                 navController.navigate("${TaskEntryDest.route}/${it}")
             })
         }
+
         composable(route = SpaceDest.route) {
-            SpacesScreen()
+            SpacesScreen(navigateToTasksOfNode = {
+                navController.navigate("${TasksOfNodeDest.route}/${it}")
+            })
         }
-        composable(route = NewDest.route) {
+
+        composable(
+            route = TasksOfNodeDest.routeWithArgs,
+            arguments = listOf(
+                navArgument(TasksOfNodeDest.nodeIdArg) { type = NavType.LongType }
+            )
+        ) {
+            TasksOfNodeScreen(
+                navigateBack = { navController.popBackStack() },
+                navigateToTasksOfNode = { navController.navigate("${TaskEntryDest.route}/${it}") })
+        }
+
+        composable(route = NewTaskDest.route) {
             NewTaskScreen(navigateBack = { navController.popBackStack() })
         }
+
         composable(
             route = TaskEntryDest.routeWithArgs,
             arguments = listOf(
@@ -51,5 +69,7 @@ fun HandListNavHost(
         ) {
             EditTaskScreen(navigateBack = { navController.popBackStack() })
         }
+
+
     }
 }

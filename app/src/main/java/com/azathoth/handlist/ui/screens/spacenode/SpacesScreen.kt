@@ -20,12 +20,15 @@ import com.azathoth.handlist.ui.components.ListNode
 import com.azathoth.handlist.ui.theme.HandListTheme
 import kotlinx.coroutines.launch
 
-typealias UIFile = File<Nothing>
-typealias UIFileMap = HashMap<String, File<Nothing>>
+typealias UIFile = File<Long>
+typealias UIFileMap = HashMap<String, File<Long>>
 
 
 @Composable
-fun SpacesScreen(fsVM: FsVM = hiltViewModel()) {
+fun SpacesScreen(
+    fsVM: FsVM = hiltViewModel(),
+    navigateToTasksOfNode: (Long) -> Unit = {}
+) {
     val node = fsVM.root
     val expandedItems = remember { mutableStateListOf<UIFile>() }
     LazyColumn {
@@ -41,6 +44,7 @@ fun SpacesScreen(fsVM: FsVM = hiltViewModel()) {
                     expandedItems.add(it)
                 }
             },
+            onListClick = navigateToTasksOfNode,
         )
     }
 }
@@ -49,12 +53,14 @@ fun LazyListScope.nodes(
     nodes: UIFileMap,
     isExpanded: (UIFile) -> Boolean,
     toggleExpanded: (UIFile) -> Unit,
+    onListClick: (Long) -> Unit,
 ) {
     nodes.forEach { (_, v) ->
         node(
             node = v,
             expanded = isExpanded,
             onExpand = toggleExpanded,
+            onListClick = onListClick,
         )
     }
 }
@@ -63,6 +69,7 @@ fun LazyListScope.node(
     node: UIFile,
     expanded: (UIFile) -> Boolean,
     onExpand: (UIFile) -> Unit,
+    onListClick: (Long) -> Unit,
 ) {
     item {
         val filename = node.path.filename.toString()
@@ -89,19 +96,18 @@ fun LazyListScope.node(
                 ListNode(
                     name = filename,
                     onClick = {
-//                        onExpand(node)
+                        node.data?.let { onListClick(it) }
                     },
                 )
             }
         }
-
-
     }
     if (expanded(node)) {
         nodes(
             node.children,
             isExpanded = expanded,
             toggleExpanded = onExpand,
+            onListClick = onListClick,
         )
     }
 }

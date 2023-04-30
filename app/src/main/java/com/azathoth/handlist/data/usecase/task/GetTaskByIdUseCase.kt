@@ -10,7 +10,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetTaskUseCase @Inject constructor(
+class GetTaskByIdUseCase @Inject constructor(
     private val taskRepo: TaskRepo
 ) {
     operator fun invoke(task_id: Long): Flow<Resource<TaskUiState>> = flow {

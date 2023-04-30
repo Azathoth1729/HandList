@@ -9,6 +9,9 @@ class TasksRepoImpl(private val taskApi: HandListApi) : TaskRepo {
     override suspend fun getTask(task_id: Long): Task =
         taskApi.getTask(task_id)
 
+    override suspend fun getAllTasksBySpaceNodeId(node_id: Long): List<Task> =
+        taskApi.getAllTasksBySpaceNodeId(node_id)
+
     override suspend fun insertTask(node_id: Long, task: Task) =
         taskApi.insertTask(node_id, task)
 

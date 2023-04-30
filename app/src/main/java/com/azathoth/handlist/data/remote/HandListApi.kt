@@ -2,10 +2,10 @@ package com.azathoth.handlist.data.remote
 
 import com.azathoth.handlist.data.model.spacenode.SpaceNode
 import com.azathoth.handlist.data.model.task.Task
+import com.azathoth.handlist.data.model.user.User
 import com.azathoth.handlist.data.model.user.auth.AuthRequest
 import com.azathoth.handlist.data.model.user.auth.RegisterRequest
 import com.azathoth.handlist.data.model.user.auth.TokenResponse
-import com.azathoth.handlist.data.model.user.User
 import retrofit2.http.*
 
 interface HandListApi {
@@ -16,16 +16,22 @@ interface HandListApi {
     suspend fun getAllTasks(): List<Task>
 
     /**
-     * Retrieve an task from the given data source that matches with the [task_id].
+     * Retrieve an task from the given data source that matches with the [taskId].
      */
     @GET("tasks/{id}")
-    suspend fun getTask(@Path("id") task_id: Long): Task
+    suspend fun getTask(@Path("id") taskId: Long): Task
+
+    /**
+     * Retrieve all tasks from a spacenode that matches with the [nodeId].
+     */
+    @GET("spacenodes/{node_id}/tasks")
+    suspend fun getAllTasksBySpaceNodeId(@Path("node_id") nodeId: Long): List<Task>
 
     /**
      * Insert task in the data source
      */
-    @POST("spacenodes/{id}/tasks")
-    suspend fun insertTask(@Path("id") node_id: Long, @Body task: Task)
+    @POST("spacenodes/{node_id}/tasks")
+    suspend fun insertTask(@Path("node_id") nodeId: Long, @Body task: Task)
 
     /**
      * Update task in the data source

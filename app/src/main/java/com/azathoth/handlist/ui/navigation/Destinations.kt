@@ -5,8 +5,17 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Apps
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.ui.graphics.vector.ImageVector
 
-object AuthDest: NavDest {
+interface NavDest {
+    val route: String
+}
+
+interface IconNavDest : NavDest {
+    val icon: ImageVector
+}
+
+object AuthDest : NavDest {
     override val route: String = "Auth"
 }
 
@@ -20,9 +29,15 @@ object SpaceDest : IconNavDest {
     override val route = "Spaces"
 }
 
-object NewDest : IconNavDest {
+object NewTaskDest : IconNavDest {
     override val icon = Icons.Default.AddCircle
     override val route = "New"
+}
+
+object TasksOfNodeDest : NavDest {
+    override val route: String = "TasksOfNode"
+    const val nodeIdArg = "nodeId"
+    val routeWithArgs = "$route/{$nodeIdArg}"
 }
 
 object TaskEntryDest : NavDest {
@@ -31,4 +46,4 @@ object TaskEntryDest : NavDest {
     val routeWithArgs = "$route/{$taskIdArg}"
 }
 
-val AppMainScreens = listOf(HomeDest, SpaceDest, NewDest)
+val AppMainScreens = listOf(HomeDest, SpaceDest, NewTaskDest)

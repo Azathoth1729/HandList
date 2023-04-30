@@ -12,7 +12,6 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-
 class GetSpaceNodesUseCase @Inject constructor(
     private val repo: SpaceNodeRepo
 ) {

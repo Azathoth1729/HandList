@@ -1,4 +1,4 @@
-package com.azathoth.handlist.ui.screens
+package com.azathoth.handlist.ui.screens.task
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.azathoth.handlist.ui.components.EditTopBar
 import com.azathoth.handlist.ui.components.TaskEntryBody
-import com.azathoth.handlist.ui.screens.task.EditTaskVM
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)

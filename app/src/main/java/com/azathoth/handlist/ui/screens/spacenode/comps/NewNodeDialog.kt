@@ -1,4 +1,4 @@
-package com.azathoth.handlist.ui.components.dialog
+package com.azathoth.handlist.ui.screens.spacenode.comps
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*

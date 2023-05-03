@@ -1,4 +1,4 @@
-package com.azathoth.handlist.ui.components
+package com.azathoth.handlist.ui.screens.spacenode.comps
 
 
 import androidx.compose.foundation.layout.*
@@ -15,7 +15,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.azathoth.handlist.common.fs.PurePath
-import com.azathoth.handlist.ui.components.dialog.NewNodeDialog
 import com.azathoth.handlist.ui.screens.spacenode.NewNodeVM
 import com.azathoth.handlist.ui.theme.HandListTheme
 

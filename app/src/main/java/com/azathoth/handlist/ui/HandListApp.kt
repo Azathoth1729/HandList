@@ -8,10 +8,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-
-import com.azathoth.handlist.ui.components.BottomBar
 import com.azathoth.handlist.ui.navigation.AppMainScreens
 import com.azathoth.handlist.ui.navigation.HandListNavHost
+import com.azathoth.handlist.ui.share_comps.BottomBar
 import com.azathoth.handlist.ui.theme.HandListTheme
 
 @OptIn(ExperimentalMaterial3Api::class)

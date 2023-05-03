@@ -6,9 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.azathoth.handlist.ui.components.EditTopBar
+import com.azathoth.handlist.ui.share_comps.EditTopBar
 
-import com.azathoth.handlist.ui.components.TasksBody
+import com.azathoth.handlist.ui.share_comps.TasksBody
 
 @Composable
 fun TasksOfNodeScreen(

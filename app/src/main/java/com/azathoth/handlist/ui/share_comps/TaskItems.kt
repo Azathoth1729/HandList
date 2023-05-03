@@ -1,4 +1,4 @@
-package com.azathoth.handlist.ui.components
+package com.azathoth.handlist.ui.share_comps
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*

@@ -15,8 +15,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 
 import com.azathoth.handlist.R
-import com.azathoth.handlist.ui.components.MainTopBar
-import com.azathoth.handlist.ui.components.TasksBody
+import com.azathoth.handlist.ui.share_comps.MainTopBar
+import com.azathoth.handlist.ui.share_comps.TasksBody
 import com.azathoth.handlist.ui.theme.HandListTheme
 
 @Composable

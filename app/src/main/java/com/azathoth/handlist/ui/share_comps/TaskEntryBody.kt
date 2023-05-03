@@ -1,4 +1,4 @@
-package com.azathoth.handlist.ui.components
+package com.azathoth.handlist.ui.share_comps
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -15,9 +15,9 @@ import com.azathoth.handlist.data.Status
 import com.azathoth.handlist.data.model.spacenode.SpaceNode
 import com.azathoth.handlist.data.model.task.TaskUiState
 import com.azathoth.handlist.data.model.user.User
-import com.azathoth.handlist.ui.components.dialog.AssignUsersDialog
-import com.azathoth.handlist.ui.components.dialog.UserList
 import com.azathoth.handlist.ui.screens.task.NewTaskVM
+import com.azathoth.handlist.ui.share_comps.dialog.AssignUsersDialog
+import com.azathoth.handlist.ui.share_comps.dialog.UserList
 import com.azathoth.handlist.ui.theme.HandListTheme
 import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeler.sheets.calendar.CalendarDialog

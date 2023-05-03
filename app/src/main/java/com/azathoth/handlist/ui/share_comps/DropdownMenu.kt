@@ -1,4 +1,4 @@
-package com.azathoth.handlist.ui.components
+package com.azathoth.handlist.ui.share_comps
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth

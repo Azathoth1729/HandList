@@ -1,4 +1,4 @@
-package com.azathoth.handlist.ui.components
+package com.azathoth.handlist.ui.share_comps
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*

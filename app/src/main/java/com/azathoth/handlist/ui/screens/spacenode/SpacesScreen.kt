@@ -15,8 +15,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.azathoth.handlist.common.fs.File
-import com.azathoth.handlist.ui.components.FolderNode
-import com.azathoth.handlist.ui.components.ListNode
+import com.azathoth.handlist.ui.screens.spacenode.comps.FolderNode
+import com.azathoth.handlist.ui.screens.spacenode.comps.ListNode
 import com.azathoth.handlist.ui.theme.HandListTheme
 import kotlinx.coroutines.launch
 

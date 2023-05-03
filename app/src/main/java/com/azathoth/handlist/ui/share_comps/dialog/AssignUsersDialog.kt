@@ -1,4 +1,4 @@
-package com.azathoth.handlist.ui.components.dialog
+package com.azathoth.handlist.ui.share_comps.dialog
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.AlertDialog

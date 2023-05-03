@@ -10,8 +10,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.azathoth.handlist.ui.components.EditTopBar
-import com.azathoth.handlist.ui.components.TaskEntryBody
+import com.azathoth.handlist.ui.share_comps.EditTopBar
+import com.azathoth.handlist.ui.share_comps.TaskEntryBody
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)

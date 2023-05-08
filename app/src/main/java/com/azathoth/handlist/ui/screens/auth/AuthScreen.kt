@@ -29,6 +29,9 @@ fun AuthScreen(
 
     LaunchedEffect(viewModel, context) {
         viewModel.authResult.collect {
+            // no-auth for test
+            navigateToHome()
+
             when (it) {
                 is AuthResult.Authorized -> {
                     navigateToHome()

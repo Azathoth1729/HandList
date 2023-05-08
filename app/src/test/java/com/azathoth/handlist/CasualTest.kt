@@ -1,9 +1,9 @@
 package com.azathoth.handlist
 
+import com.azathoth.handlist.data.Status
+import com.azathoth.handlist.data.model.task.TaskUiState
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
-
-
 import java.time.LocalDateTime
 
 /**
@@ -51,6 +51,29 @@ class CasualTest {
         assertEquals(a.getProperty, "")
         a.updateProperty("Ha")
         assertEquals(a.getProperty, "Ha")
+    }
 
+    @Test
+    fun groupByTest() {
+        val words = listOf("a", "abc", "ab", "def", "abcd")
+        val byLength = words.groupBy { it.length }
+        println(byLength)
+
+        val tasks = listOf(
+            TaskUiState(name = "task1", status = Status.Todo.toString()),
+            TaskUiState(name = "task2", status = Status.Done.toString()),
+            TaskUiState(name = "task3", status = Status.InProgress.toString()),
+            TaskUiState(name = "task4", status = Status.Todo.toString()),
+            TaskUiState(name = "task5", status = Status.Todo.toString()),
+            TaskUiState(name = "task6", status = Status.Done.toString()),
+            TaskUiState(name = "task7", status = Status.InProgress.toString()),
+        )
+        val statusTasks = tasks.groupBy { Status.valueOf(it.status) }
+        println(statusTasks.keys)
+//        println(statusTasks[Status.Todo])
+        println(Status.values().forEach {
+            println(it)
+            println(statusTasks[it])
+        })
     }
 }

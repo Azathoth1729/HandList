@@ -26,7 +26,7 @@ import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
 
 @Composable
-fun TaskEntryBody(
+fun TaskEditBody(
     taskUiState: TaskUiState,
     listNodes: List<SpaceNode>,
     users: List<User>,
@@ -193,7 +193,7 @@ fun TaskInputForm(
 private fun NewTaskPreview() {
     HandListTheme {
         val viewModel: NewTaskVM = hiltViewModel()
-        TaskEntryBody(
+        TaskEditBody(
             taskUiState = viewModel.taskUiState,
             listNodes = listOf(),
             users = listOf(),

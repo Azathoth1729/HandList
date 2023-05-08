@@ -11,7 +11,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.azathoth.handlist.ui.share_comps.EditTopBar
-import com.azathoth.handlist.ui.share_comps.TaskEntryBody
+import com.azathoth.handlist.ui.share_comps.TaskEditBody
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,7 +34,7 @@ fun EditTaskScreen(
         },
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { innerPadding ->
-        TaskEntryBody(
+        TaskEditBody(
             taskUiState = viewModel.taskUiState,
             listNodes = viewModel.listNodes,
             users = viewModel.users,

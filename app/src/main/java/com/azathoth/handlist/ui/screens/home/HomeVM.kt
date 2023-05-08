@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeVM @Inject constructor(private val usecase: GetTasksUseCase) : ViewModel() {
-    var state by mutableStateOf(TaskListState())
+    var tasks by mutableStateOf(TaskListState())
         private set
 
     init {
@@ -24,7 +24,7 @@ class HomeVM @Inject constructor(private val usecase: GetTasksUseCase) : ViewMod
 
     private fun getTasks() {
         usecase().onEach {
-            state = when (it) {
+            tasks = when (it) {
                 is Resource.Success -> {
                     TaskListState(tasks = it.data ?: emptyList())
                 }

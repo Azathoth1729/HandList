@@ -34,10 +34,10 @@ fun SpacesScreen(
     LazyColumn {
         node(
             node = node,
-            expanded = {
+            isExpanded = {
                 expandedItems.contains(it)
             },
-            onExpand = {
+            toggleExpanded = {
                 if (expandedItems.contains(it)) {
                     expandedItems.remove(it)
                 } else {
@@ -58,8 +58,8 @@ fun LazyListScope.nodes(
     nodes.forEach { (_, v) ->
         node(
             node = v,
-            expanded = isExpanded,
-            onExpand = toggleExpanded,
+            isExpanded = isExpanded,
+            toggleExpanded = toggleExpanded,
             onListClick = onListClick,
         )
     }
@@ -67,8 +67,8 @@ fun LazyListScope.nodes(
 
 fun LazyListScope.node(
     node: UIFile,
-    expanded: (UIFile) -> Boolean,
-    onExpand: (UIFile) -> Unit,
+    isExpanded: (UIFile) -> Boolean,
+    toggleExpanded: (UIFile) -> Unit,
     onListClick: (Long) -> Unit,
 ) {
     item {
@@ -84,8 +84,8 @@ fun LazyListScope.node(
                     name = filename,
                     basePath = node.path,
                     viewModel = newNodeVM,
-                    expanded = expanded(node),
-                    onExpand = { onExpand(node) },
+                    expanded = isExpanded(node),
+                    onExpand = { toggleExpanded(node) },
                     onNew = {
                         coroutineScope.launch {
                             newNodeVM.saveNode()
@@ -102,11 +102,11 @@ fun LazyListScope.node(
             }
         }
     }
-    if (expanded(node)) {
+    if (isExpanded(node)) {
         nodes(
             node.children,
-            isExpanded = expanded,
-            toggleExpanded = onExpand,
+            isExpanded = isExpanded,
+            toggleExpanded = toggleExpanded,
             onListClick = onListClick,
         )
     }

@@ -16,7 +16,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 
 import com.azathoth.handlist.R
 import com.azathoth.handlist.ui.share_comps.MainTopBar
-import com.azathoth.handlist.ui.share_comps.TasksBody
+import com.azathoth.handlist.ui.share_comps.TaskList
 import com.azathoth.handlist.ui.theme.HandListTheme
 
 @Composable
@@ -30,8 +30,8 @@ fun HomeScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         MainTopBar()
-        TasksBody(
-            taskListState = viewModel.state,
+        TaskList(
+            taskListState = viewModel.tasks,
             onTaskClick = navigateToEditTask,
             modifier = modifier
         )
@@ -42,7 +42,7 @@ fun HomeScreen(
 @Composable
 fun HomeScreenBodyPreview() {
     HandListTheme {
-        TasksBody(
+        TaskList(
             taskListState = TaskListState(
                 tasks = listOf(),
             ),

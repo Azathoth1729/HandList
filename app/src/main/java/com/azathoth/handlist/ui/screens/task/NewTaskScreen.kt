@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.azathoth.handlist.ui.share_comps.TaskEntryBody
+import com.azathoth.handlist.ui.share_comps.TaskEditBody
 import kotlinx.coroutines.launch
 
 
@@ -17,7 +17,7 @@ fun NewTaskScreen(
 ) {
     val coroutineScope = rememberCoroutineScope()
 
-    TaskEntryBody(
+    TaskEditBody(
         taskUiState = viewModel.taskUiState,
         listNodes = viewModel.listNodes,
         users = viewModel.users,

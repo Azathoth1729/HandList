@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.azathoth.handlist.ui.share_comps.EditTopBar
 
-import com.azathoth.handlist.ui.share_comps.TasksBody
+import com.azathoth.handlist.ui.share_comps.TaskList
 
 @Composable
 fun TasksOfNodeScreen(
@@ -26,8 +26,8 @@ fun TasksOfNodeScreen(
             navigateBack = navigateBack,
             onMore = onMore,
         )
-        TasksBody(
-            taskListState = viewModel.state,
+        TaskList(
+            taskListState = viewModel.tasks,
             onTaskClick = navigateToTasksOfNode,
             modifier = modifier
         )

@@ -38,7 +38,6 @@ class FsVM @Inject constructor(
             state.data.filter { it.nodetype == SpaceNodeType.List }.forEach {
                 fs.touch(it.path)
                 fs.writeFile(it.path, it.id)
-                it.path
             }
         }
     }

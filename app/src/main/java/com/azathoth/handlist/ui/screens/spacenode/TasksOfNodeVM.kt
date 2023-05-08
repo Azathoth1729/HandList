@@ -20,7 +20,7 @@ class TasksOfNodeVM @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val usecase: GetTasksByNodeUseCase
 ) : ViewModel() {
-    var state by mutableStateOf(TaskListState())
+    var tasks by mutableStateOf(TaskListState())
         private set
 
     private val nodeId: Long = checkNotNull(savedStateHandle[TasksOfNodeDest.nodeIdArg])
@@ -31,7 +31,7 @@ class TasksOfNodeVM @Inject constructor(
 
     private fun getTasks(nodeId: Long) {
         usecase(nodeId).onEach {
-            state = when (it) {
+            tasks = when (it) {
                 is Resource.Success -> {
                     TaskListState(tasks = it.data ?: emptyList())
                 }

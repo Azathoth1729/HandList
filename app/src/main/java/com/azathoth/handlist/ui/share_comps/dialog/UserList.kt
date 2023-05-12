@@ -14,7 +14,7 @@ import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.azathoth.handlist.data.DemoData
+import com.azathoth.handlist.data.DemoDataProvider
 import com.azathoth.handlist.data.model.user.User
 import com.azathoth.handlist.ui.theme.HandListTheme
 
@@ -72,8 +72,8 @@ fun UserItem(
 @Composable
 fun UserListPreview() {
     HandListTheme {
-        val allUsers = DemoData.demoAllUsers()
-        val assignUsers = DemoData.demoAssignUsers().toMutableStateList()
+        val allUsers = DemoDataProvider.demoAllUsers()
+        val assignUsers = DemoDataProvider.demoAssignUsers().toMutableStateList()
         UserList(
             allUsers = allUsers,
             assignUsers = assignUsers,

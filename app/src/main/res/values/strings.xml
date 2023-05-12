@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">HandList</string>
 
-    <string name="no_item_description">You currently have no tasks</string>
+    <string name="no_item_description">No tasks available</string>
 
     <string name="loading_tasks">Loading Tasks…</string>
 

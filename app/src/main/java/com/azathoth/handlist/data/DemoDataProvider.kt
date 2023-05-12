@@ -2,9 +2,10 @@ package com.azathoth.handlist.data
 
 import com.azathoth.handlist.common.fs.PurePath
 import com.azathoth.handlist.common.fs.TrieFs
+import com.azathoth.handlist.data.model.task.TaskUiState
 import com.azathoth.handlist.data.model.user.User
 
-object DemoData {
+object DemoDataProvider {
     fun demoNodeTree(): TrieFs<Nothing> {
         val fs = TrieFs<Nothing>()
         fs.mkdir("Working", "Study", "Workout", "Cooking")
@@ -46,4 +47,44 @@ object DemoData {
 
     fun demoAssignUsers(): List<User> =
         listOf(0, 2, 4).map { demoAllUsers()[it] }
+
+    val demoAllTaskUiState = listOf(
+        TaskUiState(
+            name = "task1",
+            status = Status.Todo.toString(),
+            startTime = "2023-03-27",
+            endTime = "2023-05-12"
+        ),
+        TaskUiState(
+            name = "task2",
+            status = Status.Done.toString(),
+            startTime = "2023-03-28",
+            endTime = "2023-04-20"
+        ),
+        TaskUiState(
+            name = "task3",
+            status = Status.InProgress.toString(),
+            startTime = "2023-03-25",
+        ),
+        TaskUiState(
+            name = "task4",
+            status = Status.Todo.toString(),
+            endTime = "2023-05-25"
+        ),
+        TaskUiState(
+            name = "task5",
+            status = Status.Todo.toString(),
+            startTime = "2023-05-27",
+        ),
+        TaskUiState(
+            name = "task6",
+            status = Status.Done.toString(),
+        ),
+        TaskUiState(
+            name = "task7",
+            status = Status.InProgress.toString(),
+            startTime = "2023-02-27",
+            endTime = "2023-05-25"
+        ),
+    )
 }

@@ -48,7 +48,7 @@ fun TaskEditBody(
             users = users,
         )
 
-        Spacer(modifier = modifier.height(16.dp))
+        Spacer(modifier = modifier.height(8.dp))
 
         Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
             Button(

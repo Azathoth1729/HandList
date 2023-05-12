@@ -24,11 +24,28 @@ fun getRandomStr(length: Int): String {
 
 }
 
+enum class DateStatus {
+    Today,
+    Overdue,
+    Next,
+    NoDueDate
+}
+
+fun LocalDate?.toDateStatus() =
+    when {
+        this == null -> DateStatus.NoDueDate
+        this.isBefore(LocalDate.now()) -> DateStatus.Overdue
+        this.isEqual(LocalDate.now()) -> DateStatus.Today
+        else -> DateStatus.Next
+    }
+
 fun getRandomStr8(): String = getRandomStr(8)
 
 private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
 fun String.toLocalDateTime(): LocalDateTime = LocalDateTime.parse(this, formatter)
+
+fun String.toLocalDate(): LocalDate = LocalDate.parse(this, formatter)
 
 fun LocalDateTime.format(): String = this.format(formatter)
 

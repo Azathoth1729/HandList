@@ -11,7 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.azathoth.handlist.R
-import com.azathoth.handlist.data.DemoData
+import com.azathoth.handlist.data.DemoDataProvider
 import com.azathoth.handlist.ui.theme.HandListTheme
 
 @Composable
@@ -63,8 +63,8 @@ fun AssignUsersDialogPreview() {
                 dialogExpanded = dialogExpanded,
                 onDialogExpanded = { dialogExpanded = it }
             ) {
-                val allUsers = DemoData.demoAllUsers().toMutableStateList()
-                val assignUsers = DemoData.demoAssignUsers().toMutableStateList()
+                val allUsers = DemoDataProvider.demoAllUsers().toMutableStateList()
+                val assignUsers = DemoDataProvider.demoAssignUsers().toMutableStateList()
                 UserList(
                     allUsers = allUsers,
                     assignUsers = assignUsers,

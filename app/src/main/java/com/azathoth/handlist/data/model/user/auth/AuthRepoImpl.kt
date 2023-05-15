@@ -29,9 +29,7 @@ class AuthRepoImpl(
     override suspend fun signIn(email: String, password: String): AuthResult<Unit> = try {
         val response = authApi.signIn(AuthRequest(email = email, password = password))
 
-        prefs.edit()
-            .putString("jwt", response.token)
-            .apply()
+        prefs.edit().putString("jwt", response.token).putString("userEmail", email).apply()
 
         AuthResult.Authorized()
     } catch (e: HttpException) {

@@ -19,13 +19,14 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     navigateToEditPost: (Long) -> Unit = { },
     navigateToNewPost: () -> Unit = { },
+    navigateToProfile: () -> Unit = { },
     viewModel: HomeVM = hiltViewModel()
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        MainTopBar()
+        MainTopBar(navigateToProfile = navigateToProfile)
         TaskList(
             taskListState = viewModel.tasks,
             onTaskClick = navigateToEditPost,

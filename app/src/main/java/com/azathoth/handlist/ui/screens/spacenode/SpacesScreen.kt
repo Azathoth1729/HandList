@@ -1,6 +1,8 @@
 package com.azathoth.handlist.ui.screens.spacenode
 
 import android.util.Log
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
@@ -10,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,6 +21,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.azathoth.handlist.common.fs.File
 import com.azathoth.handlist.ui.screens.spacenode.comps.FolderNode
 import com.azathoth.handlist.ui.screens.spacenode.comps.ListNode
+import com.azathoth.handlist.ui.share_comps.MainTopBar
 import com.azathoth.handlist.ui.theme.HandListTheme
 import kotlinx.coroutines.launch
 
@@ -31,39 +35,30 @@ fun SpacesScreen(
     navigateToTasksOfNode: (Long) -> Unit = {}
 ) {
     val node = fsVM.root
-    val expandedItems = remember { mutableStateListOf<UIFile>() }
-    LazyColumn {
-        node(
-            node = node,
-            isExpanded = {
-                expandedItems.contains(it)
-            },
-            toggleExpanded = {
-                if (expandedItems.contains(it)) {
-                    expandedItems.remove(it)
-                } else {
-                    expandedItems.add(it)
-                }
-            },
-            onListClick = navigateToTasksOfNode,
-        )
+    val expandedItems = remember  { mutableStateListOf<UIFile>() }
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        MainTopBar()
+        LazyColumn {
+            node(
+                node = node,
+                isExpanded = {
+                    expandedItems.contains(it)
+                },
+                toggleExpanded = {
+                    if (expandedItems.contains(it)) {
+                        expandedItems.remove(it)
+                    } else {
+                        expandedItems.add(it)
+                    }
+                },
+                onListClick = navigateToTasksOfNode,
+            )
+        }
     }
-}
 
-fun LazyListScope.nodes(
-    nodes: UIFileMap,
-    isExpanded: (UIFile) -> Boolean,
-    toggleExpanded: (UIFile) -> Unit,
-    onListClick: (Long) -> Unit,
-) {
-    nodes.forEach { (_, v) ->
-        node(
-            node = v,
-            isExpanded = isExpanded,
-            toggleExpanded = toggleExpanded,
-            onListClick = onListClick,
-        )
-    }
 }
 
 fun LazyListScope.node(
@@ -110,6 +105,22 @@ fun LazyListScope.node(
     if (isExpanded(node)) {
         nodes(
             node.children,
+            isExpanded = isExpanded,
+            toggleExpanded = toggleExpanded,
+            onListClick = onListClick,
+        )
+    }
+}
+
+fun LazyListScope.nodes(
+    nodes: UIFileMap,
+    isExpanded: (UIFile) -> Boolean,
+    toggleExpanded: (UIFile) -> Unit,
+    onListClick: (Long) -> Unit,
+) {
+    nodes.forEach { (_, v) ->
+        node(
+            node = v,
             isExpanded = isExpanded,
             toggleExpanded = toggleExpanded,
             onListClick = onListClick,

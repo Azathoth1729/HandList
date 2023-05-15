@@ -42,7 +42,7 @@ Bar at the top of the app's MainScreen to display the user management and genera
 fun MainTopBar(
     modifier: Modifier = Modifier,
     onNavClick: () -> Unit = { },
-    onActions: () -> Unit = { },
+    navigateToProfile: () -> Unit = { },
 ) {
     CenterAlignedTopAppBar(
         title = {
@@ -56,10 +56,10 @@ fun MainTopBar(
             }
         },
         actions = {
-            IconButton(onClick = onActions) {
+            IconButton(onClick = navigateToProfile) {
                 Icon(
                     imageVector = Icons.Filled.Person,
-                    contentDescription = "User management Navigation"
+                    contentDescription = "User Profile Navigation"
                 )
             }
         },
@@ -72,7 +72,7 @@ fun MainTopBar(
 fun EditTopBar(
     modifier: Modifier = Modifier,
     navigateBack: () -> Unit = { },
-    onEdit: () -> Unit = { },
+    onEdit: (() -> Unit)? = null,
     onDel: () -> Unit = { }
 ) {
 
@@ -89,38 +89,42 @@ fun EditTopBar(
             }
         },
         actions = {
-            IconButton(onClick = { expanded = true }) {
-                Icon(
-                    imageVector = Icons.Filled.MoreHoriz,
-                    contentDescription = "More operation to this task"
-                )
-                DropdownMenu(expanded = expanded,
-                    onDismissRequest = { expanded = false }
-                ) {
-                    DropdownMenuItem(
-                        text = { Text("Edit") },
-                        onClick = onEdit,
-                        leadingIcon = {
-                            Icon(
-                                Icons.Outlined.Edit,
-                                contentDescription = "edit node"
-                            )
-                        })
-                }
-                DropdownMenu(expanded = expanded,
-                    onDismissRequest = { expanded = false }
-                ) {
-                    DropdownMenuItem(
-                        text = { Text("Delete") },
-                        onClick = onDel,
-                        leadingIcon = {
-                            Icon(
-                                Icons.Outlined.Edit,
-                                contentDescription = "delete node"
-                            )
-                        })
+            if (onEdit != null) {
+                IconButton(onClick = { expanded = true }) {
+                    Icon(
+                        imageVector = Icons.Filled.MoreHoriz,
+                        contentDescription = "More operation to this task"
+                    )
+                    DropdownMenu(expanded = expanded,
+                        onDismissRequest = { expanded = false }
+                    ) {
+                        DropdownMenuItem(
+                            text = { Text("Edit") },
+                            onClick = onEdit,
+                            leadingIcon = {
+                                Icon(
+                                    Icons.Outlined.Edit,
+                                    contentDescription = "edit node"
+                                )
+                            }
+                        )
+                    }
+                    DropdownMenu(expanded = expanded,
+                        onDismissRequest = { expanded = false }
+                    ) {
+                        DropdownMenuItem(
+                            text = { Text("Delete") },
+                            onClick = onDel,
+                            leadingIcon = {
+                                Icon(
+                                    Icons.Outlined.Edit,
+                                    contentDescription = "delete node"
+                                )
+                            })
+                    }
                 }
             }
+
         },
         modifier = modifier
     )

@@ -18,16 +18,19 @@ interface HandListApi {
     suspend fun getAllTasks(): List<Task>
 
     /**
-     * Retrieve an task from the given data source that matches with the [taskId].
-     */
-    @GET("tasks/{id}")
-    suspend fun getTask(@Path("id") taskId: Long): Task
-
-    /**
      * Retrieve all tasks from a spacenode that matches with the [nodeId].
      */
     @GET("spacenodes/{node_id}/tasks")
     suspend fun getAllTasksBySpaceNodeId(@Path("node_id") nodeId: Long): List<Task>
+
+    @GET("{user_email}/tasks")
+    suspend fun getAllTasksByUserEmail(@Path("user_email") email: String)
+
+    /**
+     * Retrieve an task from the given data source that matches with the [taskId].
+     */
+    @GET("tasks/{id}")
+    suspend fun getTask(@Path("id") taskId: Long): Task
 
     /**
      * Insert task in the data source
@@ -65,6 +68,9 @@ interface HandListApi {
     @GET("users")
     suspend fun getAllUsers(): List<User>
 
+    @GET("users/{user_email}")
+    suspend fun findUserByEmail(@Path("user_email") email: String): User
+
     @POST("auth/authenticate")
     suspend fun signIn(@Body request: AuthRequest): TokenResponse
 
@@ -72,25 +78,24 @@ interface HandListApi {
     suspend fun signUp(@Body request: RegisterRequest): TokenResponse
 
 
-
     @GET("posts")
-    suspend fun findAll(): List<Post>
+    suspend fun findAllPosts(): List<Post>
 
     @POST("users/{user_email}/posts")
-    suspend fun insert(@Path("user_email") email: String, @Body post: Post)
+    suspend fun insertPost(@Path("user_email") email: String, @Body post: Post)
 
     @PUT("posts/{post_id}")
-    suspend fun update(@Path("post_id") postId: Long, @Body post: Post)
+    suspend fun updatePost(@Path("post_id") postId: Long, @Body post: Post)
 
     @DELETE("posts/{post_id}")
-    suspend fun deleteById(@Path("post_id") postId: Long)
+    suspend fun deletePostById(@Path("post_id") postId: Long)
 
     // assign a reply to a post
     @POST("posts/{post_id}/users")
-    suspend fun assignUser(@Path("post_id") postId: Long, @Body reply: Reply)
+    suspend fun assignUserForPost(@Path("post_id") postId: Long, @Body reply: Reply)
 
     // remove a reply from a post
     @DELETE("posts/{post_id}/users")
-    suspend fun freeUser(@Path("post_id") postId: Long, @Body reply: Reply)
+    suspend fun freeUserForPost(@Path("post_id") postId: Long, @Body reply: Reply)
 
 }

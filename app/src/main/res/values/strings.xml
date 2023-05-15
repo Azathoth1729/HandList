@@ -6,6 +6,7 @@
 
     <string name="loading">Loading…</string>
 
+    <string name="no_user_item">Can\'t find login user</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="nickname">Nickname</string>

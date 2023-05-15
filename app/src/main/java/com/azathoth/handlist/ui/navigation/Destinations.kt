@@ -20,6 +20,10 @@ object AuthDest : NavDest {
     override val route: String = "Auth"
 }
 
+object ProfileDest : NavDest {
+    override val route: String = "Profile"
+}
+
 object HomeDest : IconNavDest {
     override val icon = Icons.Default.Menu
     override val route = "Home"

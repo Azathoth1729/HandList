@@ -14,6 +14,7 @@ import com.azathoth.handlist.ui.screens.spacenode.SpacesScreen
 import com.azathoth.handlist.ui.screens.spacenode.TasksOfNodeScreen
 import com.azathoth.handlist.ui.screens.task.EditTaskScreen
 import com.azathoth.handlist.ui.screens.task.NewTaskScreen
+import com.azathoth.handlist.ui.screens.user.ProfileScreen
 
 @Composable
 fun HandListNavHost(
@@ -35,10 +36,18 @@ fun HandListNavHost(
             })
         }
 
+        composable(route = ProfileDest.route) {
+            ProfileScreen(navigateBack = { navController.popBackStack() })
+        }
+
         composable(route = HomeDest.route) {
-            HomeScreen(navigateToEditPost = {
-                navController.navigate("${TaskEntryDest.route}/${it}")
-            })
+            HomeScreen(
+                navigateToEditPost = {
+                    navController.navigate("${TaskEntryDest.route}/${it}")
+                },
+                navigateToProfile = {
+                    navController.navigate(ProfileDest.route)
+                })
         }
 
         composable(route = SpaceDest.route) {

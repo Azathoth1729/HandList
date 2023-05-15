@@ -17,7 +17,12 @@ class GetTasksByNodeUseCase @Inject constructor(
     operator fun invoke(nodeId: Long): Flow<Resource<List<TaskUiState>>> = flow {
         try {
             emit(Resource.Loading())
-            val tasks = taskRepo.getAllTasksBySpaceNodeId(nodeId).map(Task::toUiState)
+            val tasks = (
+                    if (nodeId == (-1).toLong()) {
+                        taskRepo.getAllTasks()
+                    } else taskRepo.getAllTasksBySubPath(nodeId))
+                .map(Task::toUiState)
+
             emit(Resource.Success(tasks))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))

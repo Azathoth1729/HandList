@@ -28,11 +28,11 @@ class HomeVM @Inject constructor(private val usecase: GetTasksUseCase) : ViewMod
                 is Resource.Success -> {
                     TaskListState(tasks = it.data ?: emptyList())
                 }
+
                 is Resource.Error -> {
-                    TaskListState(
-                        error = it.message ?: "An unexpected error occurred"
-                    )
+                    TaskListState(error = it.message ?: "An unexpected error occurred")
                 }
+
                 is Resource.Loading -> {
                     TaskListState(isLoading = true)
                 }

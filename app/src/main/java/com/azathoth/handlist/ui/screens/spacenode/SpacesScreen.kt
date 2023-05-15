@@ -1,5 +1,6 @@
 package com.azathoth.handlist.ui.screens.spacenode
 
+import android.util.Log
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
@@ -86,6 +87,10 @@ fun LazyListScope.node(
                     viewModel = newNodeVM,
                     expanded = isExpanded(node),
                     onExpand = { toggleExpanded(node) },
+                    onNodeDetail = {
+                        node.data?.let { onListClick(it) }
+                        Log.i("onNodeDetail", "${node.path}: ${node.data}")
+                    },
                     onNew = {
                         coroutineScope.launch {
                             newNodeVM.saveNode()

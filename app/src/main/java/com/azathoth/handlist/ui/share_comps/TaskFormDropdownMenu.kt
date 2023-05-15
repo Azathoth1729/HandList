@@ -10,7 +10,7 @@ import com.azathoth.handlist.data.model.task.TaskUiState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun <T> DropdownMenu(
+fun <T> TaskFormDropdownMenu(
     taskUiState: TaskUiState,
     onValueChange: (TaskUiState, T) -> Unit,
     value: String,

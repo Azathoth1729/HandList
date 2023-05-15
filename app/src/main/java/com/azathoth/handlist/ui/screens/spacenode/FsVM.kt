@@ -30,6 +30,8 @@ class FsVM @Inject constructor(
                 state = it
             }
 
+            fs.writeFile(root.path, -1)
+
             state.data.filter { it.nodetype == SpaceNodeType.Folder }.forEach {
                 fs.mkdir(it.path)
                 fs.writeFile(it.path, it.id)
@@ -49,11 +51,13 @@ class FsVM @Inject constructor(
                 is Resource.Success -> {
                     NodeListState(data = it.data ?: emptyList())
                 }
+
                 is Resource.Error -> {
                     NodeListState(
                         error = it.message ?: "An unexpected error occurred"
                     )
                 }
+
                 is Resource.Loading -> {
                     NodeListState(isLoading = true)
                 }

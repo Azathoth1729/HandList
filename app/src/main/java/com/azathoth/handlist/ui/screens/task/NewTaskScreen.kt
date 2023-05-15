@@ -19,8 +19,8 @@ fun NewTaskScreen(
 
     TaskEditBody(
         taskUiState = viewModel.taskUiState,
-        listNodes = viewModel.listNodes,
-        users = viewModel.users,
+        listNodes = viewModel.listNodes.data,
+        users = viewModel.users.data,
         onTaskValueChange = viewModel::updateUiState,
         onSaveClick = {
             coroutineScope.launch {

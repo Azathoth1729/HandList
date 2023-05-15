@@ -24,7 +24,7 @@ fun TasksOfNodeScreen(
     ) {
         EditTopBar(
             navigateBack = navigateBack,
-            onMore = onMore,
+            onEdit = onMore,
         )
         TaskList(
             taskListState = viewModel.tasks,

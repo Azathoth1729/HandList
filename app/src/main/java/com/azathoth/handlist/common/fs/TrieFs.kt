@@ -74,7 +74,7 @@ class TrieFs<T> : FileSystem<T>, FileVisitable<T> {
 
     fun writeFile(p: PurePath, data: T?): Boolean {
         val file = this.getFile(p) ?: return false
-        if (file.isDir) return false
+//        if (file.isDir) return false
         file.data = data
         return true
     }

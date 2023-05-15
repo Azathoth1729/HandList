@@ -1,5 +1,7 @@
 package com.azathoth.handlist.data.remote
 
+import com.azathoth.handlist.data.model.post.Post
+import com.azathoth.handlist.data.model.post.reply.Reply
 import com.azathoth.handlist.data.model.spacenode.SpaceNode
 import com.azathoth.handlist.data.model.task.Task
 import com.azathoth.handlist.data.model.user.User
@@ -68,4 +70,27 @@ interface HandListApi {
 
     @POST("auth/register")
     suspend fun signUp(@Body request: RegisterRequest): TokenResponse
+
+
+
+    @GET("posts")
+    suspend fun findAll(): List<Post>
+
+    @POST("users/{user_email}/posts")
+    suspend fun insert(@Path("user_email") email: String, @Body post: Post)
+
+    @PUT("posts/{post_id}")
+    suspend fun update(@Path("post_id") postId: Long, @Body post: Post)
+
+    @DELETE("posts/{post_id}")
+    suspend fun deleteById(@Path("post_id") postId: Long)
+
+    // assign a reply to a post
+    @POST("posts/{post_id}/users")
+    suspend fun assignUser(@Path("post_id") postId: Long, @Body reply: Reply)
+
+    // remove a reply from a post
+    @DELETE("posts/{post_id}/users")
+    suspend fun freeUser(@Path("post_id") postId: Long, @Body reply: Reply)
+
 }

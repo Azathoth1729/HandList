@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.azathoth.handlist.ui.screens.auth.AuthScreen
 import com.azathoth.handlist.ui.screens.home.HomeScreen
+import com.azathoth.handlist.ui.screens.post.PostScreen
 import com.azathoth.handlist.ui.screens.spacenode.SpacesScreen
 import com.azathoth.handlist.ui.screens.spacenode.TasksOfNodeScreen
 import com.azathoth.handlist.ui.screens.task.EditTaskScreen
@@ -35,7 +36,7 @@ fun HandListNavHost(
         }
 
         composable(route = HomeDest.route) {
-            HomeScreen(navigateToEditTask = {
+            HomeScreen(navigateToEditPost = {
                 navController.navigate("${TaskEntryDest.route}/${it}")
             })
         }
@@ -44,6 +45,10 @@ fun HandListNavHost(
             SpacesScreen(navigateToTasksOfNode = {
                 navController.navigate("${TasksOfNodeDest.route}/${it}")
             })
+        }
+
+        composable(route = PostDest.route) {
+            PostScreen()
         }
 
         composable(

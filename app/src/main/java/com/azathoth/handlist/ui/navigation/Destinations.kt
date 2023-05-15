@@ -4,6 +4,7 @@ package com.azathoth.handlist.ui.navigation
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Apps
+import androidx.compose.material.icons.filled.Chat
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.ui.graphics.vector.ImageVector
 
@@ -34,6 +35,12 @@ object NewTaskDest : IconNavDest {
     override val route = "New"
 }
 
+object PostDest : IconNavDest {
+    override val icon = Icons.Default.Chat
+    override val route = "Post"
+}
+
+
 object TasksOfNodeDest : NavDest {
     override val route: String = "TasksOfNode"
     const val nodeIdArg = "nodeId"
@@ -46,4 +53,4 @@ object TaskEntryDest : NavDest {
     val routeWithArgs = "$route/{$taskIdArg}"
 }
 
-val AppMainScreens = listOf(HomeDest, SpaceDest, NewTaskDest)
+val AppMainScreens = listOf(HomeDest, SpaceDest, PostDest, NewTaskDest)

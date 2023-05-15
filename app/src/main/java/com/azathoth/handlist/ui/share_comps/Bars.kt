@@ -2,10 +2,13 @@ package com.azathoth.handlist.ui.share_comps
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.azathoth.handlist.R
 import com.azathoth.handlist.ui.navigation.AppMainScreens
 import com.azathoth.handlist.ui.navigation.HomeDest
 import com.azathoth.handlist.ui.navigation.IconNavDest
@@ -43,7 +46,7 @@ fun MainTopBar(
 ) {
     CenterAlignedTopAppBar(
         title = {
-            Text("HeadList")
+            Text(stringResource(R.string.app_name))
         },
         navigationIcon = {
             IconButton(onClick = onNavClick) {
@@ -69,8 +72,12 @@ fun MainTopBar(
 fun EditTopBar(
     modifier: Modifier = Modifier,
     navigateBack: () -> Unit = { },
-    onMore: () -> Unit = { },
+    onEdit: () -> Unit = { },
+    onDel: () -> Unit = { }
 ) {
+
+    var expanded by remember { mutableStateOf(false) }
+
     CenterAlignedTopAppBar(
         title = {},
         navigationIcon = {
@@ -82,16 +89,43 @@ fun EditTopBar(
             }
         },
         actions = {
-            IconButton(onClick = onMore) {
+            IconButton(onClick = { expanded = true }) {
                 Icon(
                     imageVector = Icons.Filled.MoreHoriz,
                     contentDescription = "More operation to this task"
                 )
+                DropdownMenu(expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    DropdownMenuItem(
+                        text = { Text("Edit") },
+                        onClick = onEdit,
+                        leadingIcon = {
+                            Icon(
+                                Icons.Outlined.Edit,
+                                contentDescription = "edit node"
+                            )
+                        })
+                }
+                DropdownMenu(expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    DropdownMenuItem(
+                        text = { Text("Delete") },
+                        onClick = onDel,
+                        leadingIcon = {
+                            Icon(
+                                Icons.Outlined.Edit,
+                                contentDescription = "delete node"
+                            )
+                        })
+                }
             }
         },
         modifier = modifier
     )
 }
+
 
 @Preview(showBackground = true)
 @Composable
@@ -101,13 +135,6 @@ fun TopBarPreview() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun EditTopBarPreview() {
-    HandListTheme {
-        EditTopBar()
-    }
-}
 
 @Preview(showBackground = true)
 @Composable
@@ -120,5 +147,13 @@ fun BottomBarPreview() {
             onTabSelected = { screen ->
                 currentNavDest = screen
             })
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun EditTopBarPreview() {
+    HandListTheme {
+        EditTopBar()
     }
 }

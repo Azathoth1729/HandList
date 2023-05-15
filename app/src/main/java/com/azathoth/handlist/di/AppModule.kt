@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import com.azathoth.handlist.common.AppConfig.BASE_URL
+import com.azathoth.handlist.data.model.post.PostRepo
+import com.azathoth.handlist.data.model.post.PostRepoImpl
 import com.azathoth.handlist.data.model.spacenode.SpaceNodeRepo
 import com.azathoth.handlist.data.model.spacenode.SpaceNodeRepoImpl
 import com.azathoth.handlist.data.model.task.TaskRepo
@@ -47,6 +49,11 @@ object AppModule {
     @Singleton
     fun provideUserRepo(handlistApi: HandListApi): UserRepo =
         UserRepoImpl(handlistApi)
+
+    @Provides
+    @Singleton
+    fun providePostRepo(handlistApi: HandListApi): PostRepo =
+        PostRepoImpl(handlistApi)
 
     @Provides
     @Singleton

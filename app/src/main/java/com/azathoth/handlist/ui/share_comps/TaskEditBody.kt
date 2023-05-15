@@ -129,7 +129,7 @@ fun TaskInputForm(
             modifier = Modifier.fillMaxWidth(),
         )
 
-        DropdownMenu(
+        TaskFormDropdownMenu(
             taskUiState = taskUiState,
             onValueChange = { taskUiState, value ->
                 onValueChange(taskUiState.copy(spaceNode = value))
@@ -139,7 +139,7 @@ fun TaskInputForm(
             options = listNodes,
         )
 
-        DropdownMenu(
+        TaskFormDropdownMenu(
             taskUiState = taskUiState,
             onValueChange = { taskUiState, value ->
                 onValueChange(taskUiState.copy(status = value))

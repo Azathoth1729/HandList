@@ -29,7 +29,7 @@ fun EditTaskScreen(
         topBar = {
             EditTopBar(
                 navigateBack = navigateBack,
-                onMore = onMore,
+                onEdit = onMore,
             )
         },
         snackbarHost = { SnackbarHost(snackbarHostState) }

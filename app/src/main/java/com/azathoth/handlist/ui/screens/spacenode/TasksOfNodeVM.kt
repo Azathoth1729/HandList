@@ -7,6 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.azathoth.handlist.common.Resource
+import com.azathoth.handlist.data.model.spacenode.SpaceNodeRepo
 import com.azathoth.handlist.data.usecase.task.GetTasksByNodeUseCase
 import com.azathoth.handlist.ui.navigation.TasksOfNodeDest
 import com.azathoth.handlist.ui.screens.home.TaskListState
@@ -18,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class TasksOfNodeVM @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val usecase: GetTasksByNodeUseCase
+    private val usecase: GetTasksByNodeUseCase,
+    private val nodeRepo: SpaceNodeRepo,
 ) : ViewModel() {
     var tasks by mutableStateOf(TaskListState())
         private set
@@ -35,15 +37,19 @@ class TasksOfNodeVM @Inject constructor(
                 is Resource.Success -> {
                     TaskListState(tasks = it.data ?: emptyList())
                 }
+
                 is Resource.Error -> {
                     TaskListState(
                         error = it.message ?: "An unexpected error occurred"
                     )
                 }
+
                 is Resource.Loading -> {
                     TaskListState(isLoading = true)
                 }
             }
         }.launchIn(viewModelScope)
     }
+
+
 }

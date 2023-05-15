@@ -8,7 +8,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.azathoth.handlist.data.model.spacenode.SpaceNode
 import com.azathoth.handlist.data.model.spacenode.SpaceNodeRepo
-import com.azathoth.handlist.data.model.task.*
+import com.azathoth.handlist.data.model.task.TaskRepo
+import com.azathoth.handlist.data.model.task.TaskUiState
+import com.azathoth.handlist.data.model.task.isValid
+import com.azathoth.handlist.data.model.task.toTask
+import com.azathoth.handlist.data.model.task.toUiState
 import com.azathoth.handlist.data.model.user.User
 import com.azathoth.handlist.data.model.user.UserRepo
 import com.azathoth.handlist.ui.navigation.TaskEntryDest

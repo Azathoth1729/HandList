@@ -17,8 +17,9 @@
     <string name="save_action">Save</string>
     <string name="close_action">Close</string>
     <string name="del_action">Delete</string>
-    <string name="dialog_confirm">Confirm</string>
-    <string name="dialog_dismiss">Dismiss</string>
+    <string name="confirm_action">Confirm</string>
+    <string name="dismiss_action">Dismiss</string>
+    <string name="logout_action">Logout</string>
 
     <string name="file_name">Filename</string>
     <string name="file_type">File Type</string>

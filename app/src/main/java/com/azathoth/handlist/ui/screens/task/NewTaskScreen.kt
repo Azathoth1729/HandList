@@ -15,8 +15,9 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun NewTaskScreen(
-    navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
+    navigateBack: () -> Unit = { },
+    navigateToProfile: () -> Unit = { },
     viewModel: NewTaskVM = hiltViewModel()
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -24,7 +25,7 @@ fun NewTaskScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        MainTopBar()
+        MainTopBar(navigateToProfile = navigateToProfile)
         TaskEditBody(
             taskUiState = viewModel.taskUiState,
             listNodes = viewModel.listNodes.data,

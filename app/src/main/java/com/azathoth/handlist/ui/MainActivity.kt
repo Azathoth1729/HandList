@@ -1,5 +1,7 @@
 package com.azathoth.handlist.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,5 +15,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             HandListApp()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        val prefs = this.getSharedPreferences("prefs", Context.MODE_PRIVATE)
+        prefs.edit().clear().apply()
     }
 }

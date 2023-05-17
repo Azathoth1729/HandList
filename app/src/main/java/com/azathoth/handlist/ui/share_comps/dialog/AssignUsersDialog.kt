@@ -40,7 +40,7 @@ fun AssignUsersDialog(
                         onConfirm()
                     }
                 ) {
-                    Text(stringResource(R.string.dialog_confirm))
+                    Text(stringResource(R.string.confirm_action))
                 }
             },
             dismissButton = {
@@ -49,7 +49,7 @@ fun AssignUsersDialog(
                         onDialogExpanded(false)
                     }
                 ) {
-                    Text(stringResource(R.string.dialog_dismiss))
+                    Text(stringResource(R.string.dismiss_action))
                 }
             },
             modifier = modifier

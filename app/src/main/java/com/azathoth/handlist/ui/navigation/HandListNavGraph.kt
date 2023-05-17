@@ -22,9 +22,7 @@ fun HandListNavHost(
     modifier: Modifier = Modifier,
 ) {
     NavHost(
-        navController = navController,
-        startDestination = AuthDest.route,
-        modifier = modifier
+        navController = navController, startDestination = AuthDest.route, modifier = modifier
     ) {
         composable(route = AuthDest.route) {
             AuthScreen(navigateToHome = {
@@ -37,49 +35,58 @@ fun HandListNavHost(
         }
 
         composable(route = ProfileDest.route) {
-            ProfileScreen(navigateBack = { navController.popBackStack() })
+            ProfileScreen(navigateBack = { navController.popBackStack() },
+                navigateToAuth = { navController.navigate(AuthDest.route) })
         }
 
         composable(route = HomeDest.route) {
             HomeScreen(
                 navigateToEditPost = {
                     navController.navigate("${TaskEntryDest.route}/${it}")
-                },
-                navigateToProfile = {
+                }, navigateToProfile = {
                     navController.navigate(ProfileDest.route)
                 })
         }
 
         composable(route = SpaceDest.route) {
-            SpacesScreen(navigateToTasksOfNode = {
-                navController.navigate("${TasksOfNodeDest.route}/${it}")
-            })
+            SpacesScreen(
+                navigateToTasksOfNode = {
+                    navController.navigate("${TasksOfNodeDest.route}/${it}")
+                }, navigateToProfile = {
+                    navController.navigate(ProfileDest.route)
+                })
         }
 
         composable(route = PostDest.route) {
-            PostScreen()
+            PostScreen(
+                navigateToProfile = {
+                    navController.navigate(ProfileDest.route)
+                })
+        }
+
+        composable(route = NewTaskDest.route) {
+            NewTaskScreen(
+                navigateBack = { navController.popBackStack() },
+                navigateToProfile = {
+                    navController.navigate(ProfileDest.route)
+                })
         }
 
         composable(
             route = TasksOfNodeDest.routeWithArgs,
-            arguments = listOf(
-                navArgument(TasksOfNodeDest.nodeIdArg) { type = NavType.LongType }
-            )
+            arguments = listOf(navArgument(TasksOfNodeDest.nodeIdArg) {
+                type = NavType.LongType
+            })
         ) {
-            TasksOfNodeScreen(
-                navigateBack = { navController.popBackStack() },
+            TasksOfNodeScreen(navigateBack = { navController.popBackStack() },
                 navigateToTasksOfNode = { navController.navigate("${TaskEntryDest.route}/${it}") })
         }
 
-        composable(route = NewTaskDest.route) {
-            NewTaskScreen(navigateBack = { navController.popBackStack() })
-        }
+
 
         composable(
             route = TaskEntryDest.routeWithArgs,
-            arguments = listOf(
-                navArgument(TaskEntryDest.taskIdArg) { type = NavType.IntType }
-            )
+            arguments = listOf(navArgument(TaskEntryDest.taskIdArg) { type = NavType.IntType })
         ) {
             EditTaskScreen(navigateBack = { navController.popBackStack() })
         }

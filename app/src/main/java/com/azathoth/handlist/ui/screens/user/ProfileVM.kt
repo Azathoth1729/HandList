@@ -4,8 +4,10 @@ import android.content.SharedPreferences
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.azathoth.handlist.R
 import com.azathoth.handlist.common.Resource
 import com.azathoth.handlist.data.model.user.User
 import com.azathoth.handlist.data.model.user.UserRepo
@@ -61,7 +63,7 @@ class ProfileVM @Inject constructor(
     private fun findUserFlow(email: String?): Flow<Resource<User>> = flow {
         try {
             if (email == null) {
-                emit(Resource.Error("Don't find userEmail."))
+                emit(Resource.Error("Can't find login user"))
             } else {
                 emit(Resource.Loading())
                 val posts = userRepo.findUserByEmail(email)

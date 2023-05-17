@@ -26,13 +26,14 @@ import com.azathoth.handlist.ui.share_comps.MainTopBar
 fun PostScreen(
     modifier: Modifier = Modifier,
     navigateToEditPost: (Long) -> Unit = {},
+    navigateToProfile: () -> Unit = { },
     viewModel: PostVM = hiltViewModel()
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        MainTopBar()
+        MainTopBar(navigateToProfile = navigateToProfile)
         PostList(
             postListState = viewModel.posts,
             onPostClick = navigateToEditPost,

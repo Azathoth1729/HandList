@@ -32,15 +32,16 @@ typealias UIFileMap = HashMap<String, File<Long>>
 @Composable
 fun SpacesScreen(
     fsVM: FsVM = hiltViewModel(),
-    navigateToTasksOfNode: (Long) -> Unit = {}
+    navigateToTasksOfNode: (Long) -> Unit = {},
+    navigateToProfile: () -> Unit = { },
 ) {
     val node = fsVM.root
-    val expandedItems = remember  { mutableStateListOf<UIFile>() }
+    val expandedItems = remember { mutableStateListOf<UIFile>() }
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        MainTopBar()
+        MainTopBar(navigateToProfile = navigateToProfile)
         LazyColumn {
             node(
                 node = node,

@@ -68,8 +68,8 @@ fun AssignUsersDialogPreview() {
                 dialogExpanded = dialogExpanded,
                 onDialogExpanded = { dialogExpanded = it }
             ) {
-                val allUsers = DemoDataProvider.demoAllUsers().toMutableStateList()
-                val assignUsers = DemoDataProvider.demoAssignUsers().toMutableStateList()
+                val allUsers = DemoDataProvider.demoAllUsers.toMutableStateList()
+                val assignUsers = DemoDataProvider.demoAssignUsers.toMutableStateList()
                 UserList(
                     allUsers = allUsers,
                     assignUsers = assignUsers,

@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.azathoth.handlist.R
 import com.azathoth.handlist.data.model.user.auth.AuthResult
-import com.azathoth.handlist.data.model.user.auth.AuthUiEvent
 import com.azathoth.handlist.ui.theme.HandListTheme
 
 @Composable

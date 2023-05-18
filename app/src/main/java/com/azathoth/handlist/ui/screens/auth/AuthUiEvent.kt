@@ -1,4 +1,4 @@
-package com.azathoth.handlist.data.model.user.auth
+package com.azathoth.handlist.ui.screens.auth
 
 sealed class AuthUiEvent {
     data class SignUpEmailChanged(val value: String) : AuthUiEvent()

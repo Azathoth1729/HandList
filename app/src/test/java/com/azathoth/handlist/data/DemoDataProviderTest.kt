@@ -9,7 +9,7 @@ import java.time.LocalDate
 class DemoDataProviderTest {
     @Test
     fun demoFsTraverseTest() {
-        val fs = DemoDataProvider.demoNodeTree()
+        val fs = DemoDataProvider.demoNodeTree
         fs.accept(PrintIndentedVisitor(0))
     }
 
@@ -23,7 +23,6 @@ class DemoDataProviderTest {
 
         val statusTasks = tasks.groupBy { Status.valueOf(it.status) }
         println(statusTasks.keys)
-//        println(statusTasks[Status.Todo])
         println(Status.values().forEach {
             println(it)
             println(statusTasks[it])
@@ -39,6 +38,5 @@ class DemoDataProviderTest {
         tasksByDate.forEach { (status, tasks) ->
             println("[$status]=${tasks.map { "startTime=${it.startTime}--endTime=${it.endTime}" }}")
         }
-
     }
 }

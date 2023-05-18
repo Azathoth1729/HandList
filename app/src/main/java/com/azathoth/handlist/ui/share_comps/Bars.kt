@@ -75,7 +75,6 @@ fun EditTopBar(
     onEdit: (() -> Unit)? = null,
     onDel: () -> Unit = { }
 ) {
-
     var expanded by remember { mutableStateOf(false) }
 
     CenterAlignedTopAppBar(

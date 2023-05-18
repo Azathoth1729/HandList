@@ -177,8 +177,6 @@ fun TaskInputForm(
             }
         }
 
-
-
         OutlinedTextField(
             value = taskUiState.description,
             onValueChange = { onValueChange(taskUiState.copy(description = it)) },

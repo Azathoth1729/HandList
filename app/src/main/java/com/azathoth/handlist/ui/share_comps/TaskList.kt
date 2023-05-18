@@ -69,7 +69,7 @@ fun TaskList(
             )
         } else {
             var state by rememberSaveable { mutableStateOf(0) }
-            val titles = listOf("Status", "Time")
+            val titles = listOf("Status", "Time", "Assigns")
             Column {
                 TabRow(selectedTabIndex = state) {
                     titles.forEachIndexed { index, title ->
@@ -102,6 +102,13 @@ fun TaskList(
                         modifier = modifier
                     )
                 }
+                if (state == 2) {
+                    TaskViewByAssigns(
+                        taskListState = taskListState,
+                        onTaskClick = onTaskClick,
+                        modifier = modifier
+                    )
+                }
             }
         }
     }
@@ -123,8 +130,10 @@ inline fun <reified E : Enum<E>> TaskViewByEnum(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(enumValues<E>()) { status ->
+            val tasks = tasksByStatus[status] ?: emptyList()
+
             Text(
-                text = status.toString(),
+                text = "$status (${tasks.size})",
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.tertiary
             )
@@ -138,7 +147,7 @@ inline fun <reified E : Enum<E>> TaskViewByEnum(
                 ),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
-                tasksByStatus[status]?.forEach { task ->
+                tasks.forEach { task ->
                     TaskItem(
                         task = task,
                         onTaskClick = { onTaskClick(it.id) },
@@ -155,6 +164,107 @@ inline fun <reified E : Enum<E>> TaskViewByEnum(
     }
 }
 
+@Composable
+fun TaskViewByAssigns(
+    taskListState: TaskListState,
+    onTaskClick: (Long) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    // classify tasks by assigns
+    val tasksByAssigns = HashMap<String, MutableSet<TaskUiState>>()
+    for (task in taskListState.tasks) {
+        for (user in task.assigns) {
+            tasksByAssigns.getOrPut(user.email) { mutableSetOf() }.add(task)
+        }
+    }
+
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        items(tasksByAssigns.entries.toList()) { entry ->
+            val tasks = entry.value
+            Text(
+                text = "${entry.key} (${tasks.size})",
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.tertiary
+            )
+
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                ),
+                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            ) {
+                tasks.forEach { task ->
+                    TaskItem(
+                        task = task,
+                        onTaskClick = { onTaskClick(it.id) },
+                        modifier = Modifier
+                            .padding(4.dp)
+                            .padding(horizontal = 8.dp)
+                    )
+                    Divider()
+
+                }
+            }
+        }
+
+    }
+}
+
+@Composable
+fun <K> TaskViewByKey(
+    taskListState: TaskListState,
+    onTaskClick: (Long) -> Unit,
+    keySelector: (TaskUiState) -> K,
+    modifier: Modifier = Modifier
+) {
+    // classify tasks by keySelector
+    val tasksByStatus = taskListState.tasks.groupBy(keySelector)
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        items(tasksByStatus.entries.toList()) { entry ->
+            Text(
+                text = entry.key.toString(),
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.tertiary
+            )
+
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                ),
+                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            ) {
+                entry.value.forEach { task ->
+                    TaskItem(
+                        task = task,
+                        onTaskClick = { onTaskClick(it.id) },
+                        modifier = Modifier
+                            .padding(4.dp)
+                            .padding(horizontal = 8.dp)
+                    )
+                    Divider()
+
+                }
+            }
+        }
+
+    }
+}
 
 @Composable
 fun TaskItem(

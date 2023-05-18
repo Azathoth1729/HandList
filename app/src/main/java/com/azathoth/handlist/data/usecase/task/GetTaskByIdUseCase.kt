@@ -16,7 +16,7 @@ class GetTaskByIdUseCase @Inject constructor(
     operator fun invoke(task_id: Long): Flow<Resource<TaskUiState>> = flow {
         try {
             emit(Resource.Loading())
-            val task = taskRepo.getTask(task_id).toUiState()
+            val task = taskRepo.getTaskById(task_id).toUiState()
             emit(Resource.Success(task))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))

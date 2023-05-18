@@ -39,7 +39,7 @@ class EditTaskVM @Inject constructor(
 
     init {
         viewModelScope.launch {
-            taskUiState = repo.getTask(taskId)
+            taskUiState = repo.getTaskById(taskId)
                 .toUiState()
 
             listNodes = nodeRepo.getAllListNodes()

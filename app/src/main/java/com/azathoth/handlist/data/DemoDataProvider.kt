@@ -6,23 +6,21 @@ import com.azathoth.handlist.data.model.task.TaskUiState
 import com.azathoth.handlist.data.model.user.User
 
 object DemoDataProvider {
-    fun demoNodeTree(): TrieFs<Nothing> {
-        val fs = TrieFs<Nothing>()
-        fs.mkdir("Working", "Study", "Workout", "Cooking")
+    val demoNodeTree: TrieFs<Nothing> = TrieFs<Nothing>().apply {
+        this.mkdir("Working", "Study", "Workout", "Cooking")
 
-        fs.cd("/Working")
-        fs.touch("MorningList", "AfternoonList", "NightList")
+        this.cd("/Working")
+        this.touch("MorningList", "AfternoonList", "NightList")
 
-        fs.cd("/Study")
-        fs.mkdir("Math", "English")
-        fs.cd("Math")
-        fs.touch("AnalysisList", "GeometryList", "AlgebraList")
+        this.cd("/Study")
+        this.mkdir("Math", "English")
+        this.cd("Math")
+        this.touch("AnalysisList", "GeometryList", "AlgebraList")
 
-        fs.cd("/")
-        return fs
+        this.cd("/")
     }
 
-    fun demoNodeTreeAbsolute(): TrieFs<Nothing> {
+    val demoNodeTreeAbsolute: TrieFs<Nothing> = TrieFs<Nothing>().apply {
         val folders =
             listOf("/Working", "/Study", "/Study/Math", "/Study/English", "/Workout", "/Cooking")
         val lists = listOf(
@@ -31,13 +29,12 @@ object DemoDataProvider {
             "/Study/Math/AnalysisList",
             "/Study/Math/GeometryList",
         )
-        val fs = TrieFs<Nothing>()
-        fs.mkdir(folders.map { PurePath(it) })
-        fs.touch(lists.map { PurePath(it) })
-        return fs
+        this.mkdir(folders.map { PurePath(it) })
+        this.touch(lists.map { PurePath(it) })
     }
 
-    fun demoAllUsers(): List<User> = listOf(
+
+    val demoAllUsers: List<User> = listOf(
         User(0, "azathoth@qq.com", "azathoth", "USER"),
         User(1, "miku@qq.com", "miku", "USER"),
         User(2, "marisa@qq.com", "marisa", "USER"),
@@ -45,8 +42,8 @@ object DemoDataProvider {
         User(4, "b@qq.com", "b", "USER"),
     )
 
-    fun demoAssignUsers(): List<User> =
-        listOf(0, 2, 4).map { demoAllUsers()[it] }
+    val demoAssignUsers: List<User> =
+        listOf(0, 2, 4).map { demoAllUsers[it] }
 
     val demoAllTaskUiState = listOf(
         TaskUiState(

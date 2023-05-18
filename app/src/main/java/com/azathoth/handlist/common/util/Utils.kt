@@ -31,7 +31,7 @@ enum class DateStatus {
     NoDueDate
 }
 
-fun LocalDate?.toDateStatus() =
+fun LocalDate?.toDateStatus(): DateStatus =
     when {
         this == null -> DateStatus.NoDueDate
         this.isBefore(LocalDate.now()) -> DateStatus.Overdue

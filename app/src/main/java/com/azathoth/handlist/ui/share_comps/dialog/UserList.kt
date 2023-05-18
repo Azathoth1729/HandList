@@ -72,8 +72,8 @@ fun UserItem(
 @Composable
 fun UserListPreview() {
     HandListTheme {
-        val allUsers = DemoDataProvider.demoAllUsers()
-        val assignUsers = DemoDataProvider.demoAssignUsers().toMutableStateList()
+        val allUsers = DemoDataProvider.demoAllUsers
+        val assignUsers = DemoDataProvider.demoAssignUsers.toMutableStateList()
         UserList(
             allUsers = allUsers,
             assignUsers = assignUsers,

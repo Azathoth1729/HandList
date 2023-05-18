@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.azathoth.handlist.data.model.user.auth.AuthRepo
 import com.azathoth.handlist.data.model.user.auth.AuthResult
 import com.azathoth.handlist.data.model.user.auth.AuthState
-import com.azathoth.handlist.data.model.user.auth.AuthUiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow

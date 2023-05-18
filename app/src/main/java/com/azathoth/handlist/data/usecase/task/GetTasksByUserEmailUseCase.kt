@@ -11,23 +11,22 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetTasksByNodeUseCase @Inject constructor(
+class GetTasksByUserEmailUseCase @Inject constructor(
     private val taskRepo: TaskRepo
 ) {
-    operator fun invoke(nodeId: Long): Flow<Resource<List<TaskUiState>>> = flow {
+    operator fun invoke(email: String?): Flow<Resource<List<TaskUiState>>> = flow {
         try {
-            emit(Resource.Loading())
-            val tasks = (
-                    if (nodeId == (-1).toLong()) {
-                        taskRepo.getAllTasks()
-                    } else taskRepo.getTasksBelongToSubNodes(nodeId))
-                .map(Task::toUiState)
-
-            emit(Resource.Success(tasks))
+            if (email == null) {
+                emit(Resource.Error("Can't find login user"))
+            } else {
+                emit(Resource.Loading())
+                val tasks = taskRepo.getTasksByUserEmail(email).map(Task::toUiState)
+                emit(Resource.Success(tasks))
+            }
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))
         } catch (e: IOException) {
-            emit(Resource.Error("Couldn't reach server. Check your internet connection"))
+            emit(Resource.Error("Couldn't reach server.\nCheck your internet connection."))
         }
     }
 }

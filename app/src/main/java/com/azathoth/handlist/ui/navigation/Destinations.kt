@@ -44,7 +44,6 @@ object PostDest : IconNavDest {
     override val route = "Post"
 }
 
-
 object TasksOfNodeDest : NavDest {
     override val route: String = "TasksOfNode"
     const val nodeIdArg = "nodeId"
@@ -57,4 +56,4 @@ object TaskEntryDest : NavDest {
     val routeWithArgs = "$route/{$taskIdArg}"
 }
 
-val AppMainScreens = listOf(HomeDest, SpaceDest, PostDest, NewTaskDest)
+val AppMainScreens = listOf(HomeDest, SpaceDest, NewTaskDest)

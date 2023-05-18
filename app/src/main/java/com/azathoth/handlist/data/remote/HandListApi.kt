@@ -21,16 +21,16 @@ interface HandListApi {
      * Retrieve all tasks from a spacenode that matches with the [nodeId].
      */
     @GET("spacenodes/{node_id}/tasks")
-    suspend fun getAllTasksBySpaceNodeId(@Path("node_id") nodeId: Long): List<Task>
+    suspend fun getTasksBySpaceNodeId(@Path("node_id") nodeId: Long): List<Task>
 
-    @GET("{user_email}/tasks")
-    suspend fun getAllTasksByUserEmail(@Path("user_email") email: String)
+    @GET("users/{user_email}/tasks")
+    suspend fun getTasksByUserEmail(@Path("user_email") email: String): List<Task>
 
     /**
      * Retrieve an task from the given data source that matches with the [taskId].
      */
     @GET("tasks/{id}")
-    suspend fun getTask(@Path("id") taskId: Long): Task
+    suspend fun getTaskById(@Path("id") taskId: Long): Task
 
     /**
      * Insert task in the data source
@@ -54,7 +54,7 @@ interface HandListApi {
     suspend fun getAllNodes(): List<SpaceNode>
 
     @GET("spacenodes/{id}")
-    suspend fun getNode(@Path("id") node_id: Long): SpaceNode
+    suspend fun getNodeById(@Path("id") node_id: Long): SpaceNode
 
     @POST("spacenodes")
     suspend fun insertNode(@Body node: SpaceNode)

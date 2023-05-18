@@ -1,7 +1,5 @@
 package com.azathoth.handlist
 
-import com.azathoth.handlist.data.Status
-import com.azathoth.handlist.data.model.task.TaskUiState
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
 import java.time.LocalDateTime
@@ -13,7 +11,6 @@ class CasualTest {
     @Test
     fun listTest() {
         val l = listOf(1, 2, 3, 7, 8)
-//        println(l.subList(2, 8))
         assert(listOf<Int>().dropLast(1).isEmpty())
         assert(emptyList<Int>().joinToString("/").isBlank())
     }
@@ -51,5 +48,26 @@ class CasualTest {
         assertEquals(a.getProperty, "")
         a.updateProperty("Ha")
         assertEquals(a.getProperty, "Ha")
+    }
+
+    @Test
+    fun groupListOfObject() {
+        data class Bucket(val title: String, val items: List<String>)
+
+        val buckets = listOf(
+            Bucket(title = "A", items = listOf("Coke", "Towel")),
+            Bucket(title = "B", items = listOf("Milk", "Cookies", "Coke", "Towel")),
+            Bucket(title = "C", items = listOf("Coke")),
+            Bucket(title = "D", items = listOf("Cookies", "Coke")),
+        )
+        val map = HashMap<String, MutableSet<Bucket>>()
+        for (bucket in buckets) {
+            for (item in bucket.items) {
+                map.getOrPut(item) { mutableSetOf() }.add(bucket)
+            }
+        }
+        map.forEach { (k, v) ->
+            println("$k = ${v.map { "Bucket(${it.title})" }}")
+        }
     }
 }

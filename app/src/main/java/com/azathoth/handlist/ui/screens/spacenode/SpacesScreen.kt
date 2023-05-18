@@ -31,11 +31,11 @@ typealias UIFileMap = HashMap<String, File<Long>>
 
 @Composable
 fun SpacesScreen(
-    fsVM: FsVM = hiltViewModel(),
+    spacesVM: SpacesVM = hiltViewModel(),
     navigateToTasksOfNode: (Long) -> Unit = {},
     navigateToProfile: () -> Unit = { },
 ) {
-    val node = fsVM.root
+    val node = spacesVM.root
     val expandedItems = remember { mutableStateListOf<UIFile>() }
     Column(
         verticalArrangement = Arrangement.Center,

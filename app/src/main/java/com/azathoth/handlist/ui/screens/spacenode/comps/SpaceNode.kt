@@ -17,6 +17,7 @@ import androidx.compose.material.icons.outlined.ExpandMore
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -37,8 +38,7 @@ import com.azathoth.handlist.ui.theme.HandListTheme
 
 @Composable
 fun FolderNode(
-    name: String,
-    basePath: PurePath,
+    path: PurePath,
     expanded: Boolean,
     modifier: Modifier = Modifier,
     viewModel: NewNodeVM,
@@ -67,7 +67,12 @@ fun FolderNode(
                 imageVector = if (expanded) Icons.Outlined.ExpandMore else Icons.Outlined.ChevronRight,
                 contentDescription = "expand",
             )
-            Text(text = name)
+            if (path == PurePath("/")) {
+                Text(text = "Everything", color = MaterialTheme.colorScheme.primary)
+            } else {
+                Text(text = path.filename.toString())
+
+            }
         }
 
         Row {
@@ -87,7 +92,7 @@ fun FolderNode(
     }
 
     NewNodeDialog(
-        basePath = basePath,
+        basePath = path,
         dialogExpanded = dialogExpanded,
         onDialogExpanded = { dialogExpanded = it },
         viewModel = viewModel,
@@ -126,8 +131,7 @@ fun FolderNodePreview() {
     HandListTheme {
         var expanded by remember { mutableStateOf(false) }
         FolderNode(
-            name = "Demo Folder",
-            basePath = PurePath("/"),
+            path = PurePath("/"),
             expanded = expanded,
             onExpand = { expanded = it },
             viewModel = viewModel()

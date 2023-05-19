@@ -113,6 +113,13 @@ class PurePathTest {
     }
 
     @Test
+    fun rootPathTest() {
+        val root = PurePath("  /  ")
+        assertEquals(PurePath("/"), root)
+        assertEquals("/", root.toString())
+    }
+
+    @Test
     fun javaPathTest() {
         val p = "/home/joe/1/foo"
         val javaPath = java.nio.file.Paths.get(p)

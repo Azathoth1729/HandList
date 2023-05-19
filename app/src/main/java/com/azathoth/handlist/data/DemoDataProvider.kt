@@ -1,12 +1,12 @@
 package com.azathoth.handlist.data
 
 import com.azathoth.handlist.common.fs.PurePath
-import com.azathoth.handlist.common.fs.TrieFs
+import com.azathoth.handlist.common.fs.TrieFS
 import com.azathoth.handlist.data.model.task.TaskUiState
 import com.azathoth.handlist.data.model.user.User
 
 object DemoDataProvider {
-    val demoNodeTree: TrieFs<Nothing> = TrieFs<Nothing>().apply {
+    val demoNodeTree: TrieFS<Nothing> = TrieFS<Nothing>().apply {
         this.mkdir("Working", "Study", "Workout", "Cooking")
 
         this.cd("/Working")
@@ -20,7 +20,7 @@ object DemoDataProvider {
         this.cd("/")
     }
 
-    val demoNodeTreeAbsolute: TrieFs<Nothing> = TrieFs<Nothing>().apply {
+    val demoNodeTreeAbsolute: TrieFS<Nothing> = TrieFS<Nothing>().apply {
         val folders =
             listOf("/Working", "/Study", "/Study/Math", "/Study/English", "/Workout", "/Cooking")
         val lists = listOf(

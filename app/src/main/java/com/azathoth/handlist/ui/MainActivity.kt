@@ -17,8 +17,9 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         val prefs = this.getSharedPreferences("prefs", Context.MODE_PRIVATE)
         prefs.edit().clear().apply()
+        super.onDestroy()
+
     }
 }

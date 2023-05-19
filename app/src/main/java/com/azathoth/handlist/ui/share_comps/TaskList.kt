@@ -295,6 +295,12 @@ fun TaskItem(
         }
 
         Text(
+            text = task.assigns.joinToString(", ") { it.nickname },
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.outline
+        )
+
+        Text(
             text = task.description,
             style = MaterialTheme.typography.bodyMedium,
             maxLines = 2,
@@ -308,38 +314,7 @@ fun TaskItem(
 @Composable
 fun TabRowPreview() {
     HandListTheme {
-        var state by remember { mutableStateOf(0) }
-        val titles = listOf("Status", "Time")
         Column {
-            TabRow(selectedTabIndex = state) {
-                titles.forEachIndexed { index, title ->
-                    Tab(
-                        selected = state == index,
-                        onClick = { state = index },
-                        text = {
-                            Text(
-                                text = title,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis
-                            )
-                        }
-                    )
-                }
-            }
-            if (state == 0) {
-                Text(
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
-                    text = "Text tab 0 selected",
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
-            if (state == 1) {
-                Text(
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
-                    text = "Text tab 1 selected",
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
         }
     }
 }

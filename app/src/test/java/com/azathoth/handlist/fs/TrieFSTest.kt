@@ -1,20 +1,20 @@
 package com.azathoth.handlist.fs
 
 import com.azathoth.handlist.common.fs.PurePath
-import com.azathoth.handlist.common.fs.TrieFs
+import com.azathoth.handlist.common.fs.TrieFS
 import junit.framework.TestCase.*
 import org.junit.Test
 
-class TrieFsTest {
-    private fun tree(): TrieFs<String> {
-        val fs = TrieFs<String>()
+class TrieFSTest {
+    private fun tree(): TrieFS<String> {
+        val fs = TrieFS<String>()
         fs.touch("/x2", "/x3")
         fs.mkdir("/a/b/c", "/b", "/c/a/b")
         return fs
     }
 
-    private fun treeFromRelative(): TrieFs<String> {
-        val fs = TrieFs<String>()
+    private fun treeFromRelative(): TrieFS<String> {
+        val fs = TrieFS<String>()
         fs.touch("x2", "x3")
         fs.mkdir("a", "b", "c")
 
@@ -35,7 +35,7 @@ class TrieFsTest {
 
     @Test
     fun fsMkdirTest() {
-        var fs = TrieFs<String>()
+        var fs = TrieFS<String>()
         assertEquals(fs.ls(PurePath("/")), listOf<PurePath>())
         fs = tree()
         fs.mkdir("/a/b/c", "/b", "/c/a/b")

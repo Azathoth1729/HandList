@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.azathoth.handlist.common.fs.File
+import com.azathoth.handlist.common.fs.PurePath
 import com.azathoth.handlist.ui.screens.spacenode.comps.FolderNode
 import com.azathoth.handlist.ui.screens.spacenode.comps.ListNode
 import com.azathoth.handlist.ui.share_comps.MainTopBar
@@ -36,7 +37,10 @@ fun SpacesScreen(
     navigateToProfile: () -> Unit = { },
 ) {
     val node = spacesVM.root
-    val expandedItems = remember { mutableStateListOf<UIFile>() }
+    val expandedItems = remember { mutableStateListOf(node) }
+
+    Log.i("expandedItems", "${expandedItems.map { it.path }}")
+
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -69,7 +73,8 @@ fun LazyListScope.node(
     onListClick: (Long) -> Unit,
 ) {
     item {
-        val filename = node.path.filename.toString()
+        val filename =
+            if (node.path == PurePath("/")) "Everything" else node.path.filename.toString()
         val depth = node.path.asList().size
         val newNodeVM: NewNodeVM = hiltViewModel()
         val coroutineScope = rememberCoroutineScope()
@@ -78,8 +83,7 @@ fun LazyListScope.node(
             Spacer(modifier = Modifier.width((10 * depth).dp))
             if (node.isDir) {
                 FolderNode(
-                    name = filename,
-                    basePath = node.path,
+                    path = node.path,
                     viewModel = newNodeVM,
                     expanded = isExpanded(node),
                     onExpand = { toggleExpanded(node) },
@@ -103,9 +107,10 @@ fun LazyListScope.node(
             }
         }
     }
+
     if (isExpanded(node)) {
         nodes(
-            node.children,
+            nodes = node.children,
             isExpanded = isExpanded,
             toggleExpanded = toggleExpanded,
             onListClick = onListClick,

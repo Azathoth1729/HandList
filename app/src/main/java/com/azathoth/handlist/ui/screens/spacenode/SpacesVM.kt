@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.azathoth.handlist.common.Resource
-import com.azathoth.handlist.common.fs.TrieFs
+import com.azathoth.handlist.common.fs.TrieFS
 import com.azathoth.handlist.data.model.spacenode.SpaceNodeType
 import com.azathoth.handlist.data.model.spacenode.SpaceNodeUiState
 import com.azathoth.handlist.data.usecase.spacenode.GetSpaceNodesUseCase
@@ -19,7 +19,7 @@ import javax.inject.Inject
 class SpacesVM @Inject constructor(
     private val usecase: GetSpaceNodesUseCase,
 ) : ViewModel() {
-    private val fs by mutableStateOf(TrieFs<Long>())
+    private val fs by mutableStateOf(TrieFS<Long>())
     private var state by mutableStateOf(NodeListState())
 
     val root: UIFile

@@ -151,30 +151,28 @@ fun TaskInputForm(
 
         Row(verticalAlignment = Alignment.CenterVertically) {
 
-            taskUiState.assigns.map {
-                Text(it.nickname.substring(0..3))
-                Spacer(modifier = Modifier.width(8.dp))
+            Button(onClick = { dialogExpanded = true }) {
+                Text(stringResource(R.string.assignees))
             }
 
             Spacer(Modifier.weight(1f))
 
-            Button(onClick = { dialogExpanded = true }) {
-                Text(stringResource(R.string.assignees))
-            }
+            Text(taskUiState.assigns.joinToString(", ") { it.nickname })
         }
 
         Row(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = "${taskUiState.startTime}")
-            Text(text = "${taskUiState.endTime}")
-
-            Spacer(Modifier.weight(1f))
-
             Button(onClick = { calendarState.show() }) {
                 Text(stringResource(R.string.task_add_date_req))
             }
+
+            Spacer(Modifier.weight(1f))
+
+            Text(text = "${taskUiState.startTime} to ${taskUiState.endTime}")
+
+
         }
 
         OutlinedTextField(

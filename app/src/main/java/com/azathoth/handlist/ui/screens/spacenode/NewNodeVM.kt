@@ -17,9 +17,6 @@ class NewNodeVM @Inject constructor(private val repo: SpaceNodeRepo) : ViewModel
     var spaceNodeUiState by mutableStateOf(SpaceNodeUiState())
         private set
 
-    private val filename
-        get() = spaceNodeUiState.filename
-
     fun updateNode(newSpaceNodeUiState: SpaceNodeUiState) {
         spaceNodeUiState = newSpaceNodeUiState
     }

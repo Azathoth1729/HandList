@@ -1,9 +1,8 @@
 package com.azathoth.handlist.common.fs
 
-class TrieFs<T> : FileSystem<T>, FileVisitable<T> {
+class TrieFS<T> : FileSystem<T>, FileVisitable<T> {
     // root directory
     private val root: File<T> = File(true, "/")
-
     // current/working directory
     private var wkDir: File<T> = root
 

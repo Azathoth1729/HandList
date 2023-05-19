@@ -3,7 +3,7 @@ package com.azathoth.handlist.di
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.azathoth.handlist.common.AppConfig.BASE_URL
+import com.azathoth.handlist.common.AppConfig.LOCAL_BASE_URL
 import com.azathoth.handlist.data.model.post.PostRepo
 import com.azathoth.handlist.data.model.post.PostRepoImpl
 import com.azathoth.handlist.data.model.spacenode.SpaceNodeRepo
@@ -30,7 +30,7 @@ object AppModule {
     @Singleton
     fun provideHandListApi(): HandListApi =
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(LOCAL_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(HandListApi::class.java)
